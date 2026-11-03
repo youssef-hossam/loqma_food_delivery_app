@@ -1,0 +1,333 @@
+{
+  "source": "Figma file gjrWZG7OagAwKYv5uqbtDP - Loqma Food Delivery App",
+  "modes": {
+    "Color": [
+      "Light",
+      "Dark"
+    ],
+    "Dimension": [
+      "Default"
+    ]
+  },
+  "color": {
+    "brand/primary": {
+      "light": "#FF5A1F",
+      "dark": "#FF6A33"
+    },
+    "brand/primary-pressed": {
+      "light": "#E2470F",
+      "dark": "#FF835A"
+    },
+    "brand/primary-soft": {
+      "light": "#FFF0E8",
+      "dark": "#3A2118"
+    },
+    "brand/primary-tint": {
+      "light": "#FFDCCB",
+      "dark": "#5A2A18"
+    },
+    "brand/night": {
+      "light": "#1A1625",
+      "dark": "#2A2635"
+    },
+    "brand/accent": {
+      "light": "#FFC145",
+      "dark": "#FFC145"
+    },
+    "text/primary": {
+      "light": "#17151F",
+      "dark": "#F5F3F7"
+    },
+    "text/secondary": {
+      "light": "#6B6878",
+      "dark": "#A9A6B5"
+    },
+    "text/tertiary": {
+      "light": "#A3A0AE",
+      "dark": "#7D7A89"
+    },
+    "text/on-primary": {
+      "light": "#FFFFFF",
+      "dark": "#FFFFFF"
+    },
+    "surface/background": {
+      "light": "#FAF7F4",
+      "dark": "#121018"
+    },
+    "surface/card": {
+      "light": "#FFFFFF",
+      "dark": "#1C1924"
+    },
+    "surface/muted": {
+      "light": "#F2EEEA",
+      "dark": "#25222E"
+    },
+    "surface/sheet": {
+      "light": "#FFFFFF",
+      "dark": "#1C1924"
+    },
+    "border/default": {
+      "light": "#ECE7E2",
+      "dark": "#2E2A38"
+    },
+    "border/strong": {
+      "light": "#D9D3CC",
+      "dark": "#3E3949"
+    },
+    "status/success": {
+      "light": "#12B76A",
+      "dark": "#32D583"
+    },
+    "status/success-soft": {
+      "light": "#E7F8EF",
+      "dark": "#11291E"
+    },
+    "status/warning": {
+      "light": "#F79009",
+      "dark": "#FDB022"
+    },
+    "status/danger": {
+      "light": "#F04438",
+      "dark": "#F97066"
+    },
+    "status/danger-soft": {
+      "light": "#FEECEB",
+      "dark": "#3A1614"
+    },
+    "status/info": {
+      "light": "#2E90FA",
+      "dark": "#53B1FD"
+    },
+    "rating/star": {
+      "light": "#FFB020",
+      "dark": "#FFB020"
+    },
+    "map/land": {
+      "light": "#EEF0EB",
+      "dark": "#1E2220"
+    },
+    "map/road": {
+      "light": "#FFFFFF",
+      "dark": "#2B302D"
+    },
+    "map/park": {
+      "light": "#D7EBCF",
+      "dark": "#1F3324"
+    },
+    "map/water": {
+      "light": "#CFE3F5",
+      "dark": "#17283A"
+    }
+  },
+  "dimension": {
+    "space": {
+      "4": 4,
+      "8": 8,
+      "12": 12,
+      "16": 16,
+      "20": 20,
+      "24": 24,
+      "32": 32
+    },
+    "radius": {
+      "sm": 10,
+      "md": 14,
+      "lg": 20,
+      "xl": 28,
+      "full": 999
+    }
+  },
+  "textStyles": [
+    {
+      "name": "EN/Display",
+      "fontFamily": "Plus Jakarta Sans",
+      "weight": 800,
+      "size": 32,
+      "lineHeightPercent": 120,
+      "letterSpacingPercent": -2
+    },
+    {
+      "name": "EN/H1",
+      "fontFamily": "Plus Jakarta Sans",
+      "weight": 800,
+      "size": 26,
+      "lineHeightPercent": 125,
+      "letterSpacingPercent": -1.5
+    },
+    {
+      "name": "EN/H2",
+      "fontFamily": "Plus Jakarta Sans",
+      "weight": 700,
+      "size": 20,
+      "lineHeightPercent": 130,
+      "letterSpacingPercent": -1
+    },
+    {
+      "name": "EN/H3",
+      "fontFamily": "Plus Jakarta Sans",
+      "weight": 700,
+      "size": 17,
+      "lineHeightPercent": 135,
+      "letterSpacingPercent": -0.5
+    },
+    {
+      "name": "EN/Body L",
+      "fontFamily": "Plus Jakarta Sans",
+      "weight": 500,
+      "size": 16,
+      "lineHeightPercent": 150,
+      "letterSpacingPercent": 0
+    },
+    {
+      "name": "EN/Body",
+      "fontFamily": "Plus Jakarta Sans",
+      "weight": 500,
+      "size": 14,
+      "lineHeightPercent": 150,
+      "letterSpacingPercent": 0
+    },
+    {
+      "name": "EN/Body Regular",
+      "fontFamily": "Plus Jakarta Sans",
+      "weight": 400,
+      "size": 14,
+      "lineHeightPercent": 150,
+      "letterSpacingPercent": 0
+    },
+    {
+      "name": "EN/Label",
+      "fontFamily": "Plus Jakarta Sans",
+      "weight": 600,
+      "size": 13,
+      "lineHeightPercent": 140,
+      "letterSpacingPercent": 0
+    },
+    {
+      "name": "EN/Caption",
+      "fontFamily": "Plus Jakarta Sans",
+      "weight": 500,
+      "size": 12,
+      "lineHeightPercent": 140,
+      "letterSpacingPercent": 0
+    },
+    {
+      "name": "EN/Button",
+      "fontFamily": "Plus Jakarta Sans",
+      "weight": 700,
+      "size": 16,
+      "lineHeightPercent": 120,
+      "letterSpacingPercent": 0
+    },
+    {
+      "name": "EN/Overline",
+      "fontFamily": "Plus Jakarta Sans",
+      "weight": 700,
+      "size": 11,
+      "lineHeightPercent": 120,
+      "letterSpacingPercent": 6
+    },
+    {
+      "name": "AR/Display",
+      "fontFamily": "Cairo",
+      "weight": 800,
+      "size": 30,
+      "lineHeightPercent": 140,
+      "letterSpacingPercent": 0
+    },
+    {
+      "name": "AR/H1",
+      "fontFamily": "Cairo",
+      "weight": 800,
+      "size": 24,
+      "lineHeightPercent": 145,
+      "letterSpacingPercent": 0
+    },
+    {
+      "name": "AR/H2",
+      "fontFamily": "Cairo",
+      "weight": 700,
+      "size": 19,
+      "lineHeightPercent": 150,
+      "letterSpacingPercent": 0
+    },
+    {
+      "name": "AR/H3",
+      "fontFamily": "Cairo",
+      "weight": 700,
+      "size": 16,
+      "lineHeightPercent": 150,
+      "letterSpacingPercent": 0
+    },
+    {
+      "name": "AR/Body",
+      "fontFamily": "Cairo",
+      "weight": 500,
+      "size": 14,
+      "lineHeightPercent": 160,
+      "letterSpacingPercent": 0
+    },
+    {
+      "name": "AR/Caption",
+      "fontFamily": "Cairo",
+      "weight": 500,
+      "size": 12,
+      "lineHeightPercent": 150,
+      "letterSpacingPercent": 0
+    },
+    {
+      "name": "AR/Button",
+      "fontFamily": "Cairo",
+      "weight": 700,
+      "size": 16,
+      "lineHeightPercent": 130,
+      "letterSpacingPercent": 0
+    }
+  ],
+  "effectStyles": [
+    {
+      "name": "Shadow/Card",
+      "shadows": [
+        {
+          "blur": 20,
+          "offsetY": 6,
+          "alpha": 0.06,
+          "color": "#17151F"
+        },
+        {
+          "blur": 3,
+          "offsetY": 1,
+          "alpha": 0.04,
+          "color": "#17151F"
+        }
+      ]
+    },
+    {
+      "name": "Shadow/Float",
+      "shadows": [
+        {
+          "blur": 40,
+          "offsetY": 16,
+          "alpha": 0.14,
+          "color": "#17151F"
+        },
+        {
+          "blur": 10,
+          "offsetY": 4,
+          "alpha": 0.06,
+          "color": "#17151F"
+        }
+      ]
+    },
+    {
+      "name": "Shadow/Primary Glow",
+      "shadows": [
+        {
+          "blur": 24,
+          "offsetY": 10,
+          "alpha": 0.35,
+          "color": "#FF5A1F"
+        }
+      ]
+    }
+  ]
+}
