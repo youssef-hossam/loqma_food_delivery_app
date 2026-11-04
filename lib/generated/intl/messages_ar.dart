@@ -44,8 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m11(name) => "أهلاً يا ${name}،\nنفسك في إيه النهاردة؟";
 
-  static String m12(count) =>
-      "${Intl.plural(count, zero: 'مفيش منتجات', one: 'منتج واحد', two: 'منتجين', few: '${count} منتجات', other: '${count} منتج')}";
+  static String m12(count) => "${count} منتج";
 
   static String m13(min, max) => "${min}–${max} دقيقة";
 
@@ -83,8 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m29(query) => "مفيش نتايج لـ “${query}”";
 
-  static String m30(count, query) =>
-      "${Intl.plural(count, one: 'نتيجة واحدة لـ “${query}”', two: 'نتيجتين لـ “${query}”', few: '${count} نتايج لـ “${query}”', other: '${count} نتيجة لـ “${query}”')}";
+  static String m30(count, query) => "${count} نتيجة لـ “${query}”";
 
   static String m31(terms, privacy) => "أوافق على ${terms} و${privacy}";
 
@@ -186,20 +184,30 @@ class MessageLookup extends MessageLookupByLibrary {
         "onboardingCustomizeBody": MessageLookupByLibrary.simpleMessage(
             "اختار الحجم، زوّد الإضافات، وسيب ملاحظتك. هنبعتهولك زي ما بتحبه بالظبط."),
         "onboardingCustomizeTitle":
-            MessageLookupByLibrary.simpleMessage("كل لقمة\nعلى مزاجك"),
+            MessageLookupByLibrary.simpleMessage("كل لقمة\n*على مزاجك*"),
+        "onboardingDemoBacon":
+            MessageLookupByLibrary.simpleMessage("+ بيف بيكون"),
+        "onboardingDemoCheddar": MessageLookupByLibrary.simpleMessage("+ شيدر"),
+        "onboardingDemoDish":
+            MessageLookupByLibrary.simpleMessage("كلاسيك سماش"),
+        "onboardingDemoDouble":
+            MessageLookupByLibrary.simpleMessage("دبل باتي"),
+        "onboardingDemoNoPickles":
+            MessageLookupByLibrary.simpleMessage("من غير مخلل"),
         "onboardingDiscoverBody": MessageLookupByLibrary.simpleMessage(
             "برجر، كشري، سوشي أو كنافة — اكتشف أحسن المطاعم اللي حواليك."),
         "onboardingDiscoverTitle": MessageLookupByLibrary.simpleMessage(
-            "كل اللي نفسك فيه،\nفي تطبيق واحد"),
+            "كل اللي *نفسك فيه*،\nفي تطبيق واحد"),
         "onboardingRestaurantsCount": m17,
         "onboardingTrackBody": MessageLookupByLibrary.simpleMessage(
             "شوف الطيار على الخريطة لحظة بلحظة، ويوصلك إشعار أول ما يوصل."),
         "onboardingTrackTitle": MessageLookupByLibrary.simpleMessage(
-            "تابع طلبك\nلايف لحد باب البيت"),
+            "تابع طلبك\n*لايف* لحد باب البيت"),
         "onboardingWelcomeBody": MessageLookupByLibrary.simpleMessage(
             "اطلب من أحسن المطاعم اللي حواليك وتابع الطيار لايف لحد باب البيت."),
         "onboardingWelcomeTitle": MessageLookupByLibrary.simpleMessage(
             "أكلك المفضل،\nيوصلك سخن وبسرعة"),
+        "oneItem": MessageLookupByLibrary.simpleMessage("منتج واحد"),
         "open": MessageLookupByLibrary.simpleMessage("مفتوح"),
         "openNow": MessageLookupByLibrary.simpleMessage("مفتوح دلوقتي"),
         "optionalLabel": MessageLookupByLibrary.simpleMessage("اختياري"),

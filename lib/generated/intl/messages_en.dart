@@ -44,8 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m11(name) => "Hey ${name},\nwhat are you craving?";
 
-  static String m12(count) =>
-      "${Intl.plural(count, one: '1 item', other: '${count} items')}";
+  static String m12(count) => "${count} items";
 
   static String m13(min, max) => "${min}–${max} min";
 
@@ -83,8 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m29(query) => "No results for “${query}”";
 
-  static String m30(count, query) =>
-      "${Intl.plural(count, one: '1 result for “${query}”', other: '${count} results for “${query}”')}";
+  static String m30(count, query) => "${count} results for “${query}”";
 
   static String m31(terms, privacy) => "I agree to the ${terms} and ${privacy}";
 
@@ -188,20 +186,31 @@ class MessageLookup extends MessageLookupByLibrary {
         "onboardingCustomizeBody": MessageLookupByLibrary.simpleMessage(
             "Pick your size, add extras, leave a note. We send it exactly how you like it."),
         "onboardingCustomizeTitle":
-            MessageLookupByLibrary.simpleMessage("Make every bite\nyours"),
+            MessageLookupByLibrary.simpleMessage("Make every bite\n*yours*"),
+        "onboardingDemoBacon":
+            MessageLookupByLibrary.simpleMessage("+ Beef bacon"),
+        "onboardingDemoCheddar":
+            MessageLookupByLibrary.simpleMessage("+ Cheddar"),
+        "onboardingDemoDish":
+            MessageLookupByLibrary.simpleMessage("Classic Smash"),
+        "onboardingDemoDouble":
+            MessageLookupByLibrary.simpleMessage("Double patty"),
+        "onboardingDemoNoPickles":
+            MessageLookupByLibrary.simpleMessage("No pickles"),
         "onboardingDiscoverBody": MessageLookupByLibrary.simpleMessage(
             "Burgers, koshari, sushi or kunafa — discover the best restaurants around you."),
         "onboardingDiscoverTitle": MessageLookupByLibrary.simpleMessage(
-            "All your cravings,\nin one app"),
+            "All your *cravings*,\nin one app"),
         "onboardingRestaurantsCount": m17,
         "onboardingTrackBody": MessageLookupByLibrary.simpleMessage(
             "Watch your rider on the map in real time, and get notified the moment they arrive."),
         "onboardingTrackTitle": MessageLookupByLibrary.simpleMessage(
-            "Track your order\nlive to your door"),
+            "Track your order\n*live* to your door"),
         "onboardingWelcomeBody": MessageLookupByLibrary.simpleMessage(
             "Order from the best restaurants around you and track your rider live, right to your door."),
         "onboardingWelcomeTitle": MessageLookupByLibrary.simpleMessage(
             "Your favorite food,\ndelivered hot & fast"),
+        "oneItem": MessageLookupByLibrary.simpleMessage("1 item"),
         "open": MessageLookupByLibrary.simpleMessage("Open"),
         "openNow": MessageLookupByLibrary.simpleMessage("Open now"),
         "optionalLabel": MessageLookupByLibrary.simpleMessage("Optional"),

@@ -18,8 +18,9 @@ class AppRouter {
           settings: settings,
         );
       case Routes.onboarding:
-        // TODO: replace with OnboardingView
-        return RouterTransitions.buildFade(const OnBoardingPage());
+        return RouterTransitions.buildFade(
+          OnBoardingPage(onboardingRepository: onboardingRepository),
+        );
       case Routes.login:
         // TODO: replace with LoginView
         return RouterTransitions.buildFade(const _ComingSoon(title: 'Login'));

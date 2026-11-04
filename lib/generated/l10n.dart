@@ -191,7 +191,7 @@ class S {
   }
 
   /// `Pick {count}`
-  String pickCount(int count) {
+  String pickCount(Object count) {
     return Intl.message(
       'Pick $count',
       name: 'pickCount',
@@ -201,7 +201,7 @@ class S {
   }
 
   /// `Up to {count}`
-  String upToCount(int count) {
+  String upToCount(Object count) {
     return Intl.message(
       'Up to $count',
       name: 'upToCount',
@@ -211,17 +211,17 @@ class S {
   }
 
   /// `EGP {amount}`
-  String price(String amount) {
+  String price(Object amount) {
     return Intl.message(
       'EGP $amount',
       name: 'price',
-      desc: 'A price, amount is already formatted',
+      desc: '',
       args: [amount],
     );
   }
 
   /// `+ EGP {amount}`
-  String extraPrice(String amount) {
+  String extraPrice(Object amount) {
     return Intl.message(
       '+ EGP $amount',
       name: 'extraPrice',
@@ -231,7 +231,7 @@ class S {
   }
 
   /// `{min}–{max} min`
-  String minutesRange(int min, int max) {
+  String minutesRange(Object min, Object max) {
     return Intl.message(
       '$min–$max min',
       name: 'minutesRange',
@@ -241,7 +241,7 @@ class S {
   }
 
   /// `{minutes} min`
-  String minutesShort(int minutes) {
+  String minutesShort(Object minutes) {
     return Intl.message(
       '$minutes min',
       name: 'minutesShort',
@@ -271,7 +271,7 @@ class S {
   }
 
   /// `EGP {amount} delivery`
-  String deliveryFeeShort(String amount) {
+  String deliveryFeeShort(Object amount) {
     return Intl.message(
       'EGP $amount delivery',
       name: 'deliveryFeeShort',
@@ -290,15 +290,23 @@ class S {
     );
   }
 
-  /// `{count, plural, =1{1 item} other{{count} items}}`
-  String itemsCount(int count) {
-    return Intl.plural(
-      count,
-      one: '1 item',
-      other: '$count items',
+  /// `{count} items`
+  String itemsCount(Object count) {
+    return Intl.message(
+      '$count items',
       name: 'itemsCount',
       desc: '',
       args: [count],
+    );
+  }
+
+  /// `1 item`
+  String get oneItem {
+    return Intl.message(
+      '1 item',
+      name: 'oneItem',
+      desc: '',
+      args: [],
     );
   }
 
@@ -307,7 +315,7 @@ class S {
     return Intl.message(
       'عربي',
       name: 'languageSwitchLabel',
-      desc: 'Label on the language toggle: shows the language you switch TO',
+      desc: '',
       args: [],
     );
   }
@@ -413,7 +421,7 @@ class S {
   }
 
   /// `+{count} restaurants`
-  String onboardingRestaurantsCount(int count) {
+  String onboardingRestaurantsCount(Object count) {
     return Intl.message(
       '+$count restaurants',
       name: 'onboardingRestaurantsCount',
@@ -422,10 +430,10 @@ class S {
     );
   }
 
-  /// `All your cravings,\nin one app`
+  /// `All your *cravings*,\nin one app`
   String get onboardingDiscoverTitle {
     return Intl.message(
-      'All your cravings,\nin one app',
+      'All your *cravings*,\nin one app',
       name: 'onboardingDiscoverTitle',
       desc: '',
       args: [],
@@ -442,10 +450,10 @@ class S {
     );
   }
 
-  /// `Make every bite\nyours`
+  /// `Make every bite\n*yours*`
   String get onboardingCustomizeTitle {
     return Intl.message(
-      'Make every bite\nyours',
+      'Make every bite\n*yours*',
       name: 'onboardingCustomizeTitle',
       desc: '',
       args: [],
@@ -462,10 +470,10 @@ class S {
     );
   }
 
-  /// `Track your order\nlive to your door`
+  /// `Track your order\n*live* to your door`
   String get onboardingTrackTitle {
     return Intl.message(
-      'Track your order\nlive to your door',
+      'Track your order\n*live* to your door',
       name: 'onboardingTrackTitle',
       desc: '',
       args: [],
@@ -483,7 +491,7 @@ class S {
   }
 
   /// `Arriving in {minutes} min`
-  String onboardingArrivingIn(int minutes) {
+  String onboardingArrivingIn(Object minutes) {
     return Intl.message(
       'Arriving in $minutes min',
       name: 'onboardingArrivingIn',
@@ -512,6 +520,56 @@ class S {
     );
   }
 
+  /// `Classic Smash`
+  String get onboardingDemoDish {
+    return Intl.message(
+      'Classic Smash',
+      name: 'onboardingDemoDish',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Double patty`
+  String get onboardingDemoDouble {
+    return Intl.message(
+      'Double patty',
+      name: 'onboardingDemoDouble',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `+ Cheddar`
+  String get onboardingDemoCheddar {
+    return Intl.message(
+      '+ Cheddar',
+      name: 'onboardingDemoCheddar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `+ Beef bacon`
+  String get onboardingDemoBacon {
+    return Intl.message(
+      '+ Beef bacon',
+      name: 'onboardingDemoBacon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No pickles`
+  String get onboardingDemoNoPickles {
+    return Intl.message(
+      'No pickles',
+      name: 'onboardingDemoNoPickles',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Super fast`
   String get superFast {
     return Intl.message(
@@ -523,7 +581,7 @@ class S {
   }
 
   /// `Avg. {minutes} min`
-  String avgMinutes(int minutes) {
+  String avgMinutes(Object minutes) {
     return Intl.message(
       'Avg. $minutes min',
       name: 'avgMinutes',
@@ -533,7 +591,7 @@ class S {
   }
 
   /// `{rating} rating`
-  String ratingLabel(String rating) {
+  String ratingLabel(Object rating) {
     return Intl.message(
       '$rating rating',
       name: 'ratingLabel',
@@ -683,7 +741,7 @@ class S {
   }
 
   /// `Join loqma and get 50% off your first order with {code}.`
-  String registerSubtitle(String code) {
+  String registerSubtitle(Object code) {
     return Intl.message(
       'Join loqma and get 50% off your first order with $code.',
       name: 'registerSubtitle',
@@ -753,7 +811,7 @@ class S {
   }
 
   /// `I agree to the {terms} and {privacy}`
-  String termsAgreement(String terms, String privacy) {
+  String termsAgreement(Object terms, Object privacy) {
     return Intl.message(
       'I agree to the $terms and $privacy',
       name: 'termsAgreement',
@@ -803,7 +861,7 @@ class S {
   }
 
   /// `Hey {name},\nwhat are you craving?`
-  String homeGreeting(String name) {
+  String homeGreeting(Object name) {
     return Intl.message(
       'Hey $name,\nwhat are you craving?',
       name: 'homeGreeting',
@@ -833,7 +891,7 @@ class S {
   }
 
   /// `{percent}% off your\nfirst order`
-  String promoFirstOrder(int percent) {
+  String promoFirstOrder(Object percent) {
     return Intl.message(
       '$percent% off your\nfirst order',
       name: 'promoFirstOrder',
@@ -843,7 +901,7 @@ class S {
   }
 
   /// `Code: {code}`
-  String promoCode(String code) {
+  String promoCode(Object code) {
     return Intl.message(
       'Code: $code',
       name: 'promoCode',
@@ -933,11 +991,11 @@ class S {
   }
 
   /// `{count} places`
-  String placesCount(String count) {
+  String placesCount(Object count) {
     return Intl.message(
       '$count places',
       name: 'placesCount',
-      desc: 'count can be like 120+',
+      desc: '',
       args: [count],
     );
   }
@@ -983,7 +1041,7 @@ class S {
   }
 
   /// `★ {rating}+`
-  String filterRating(String rating) {
+  String filterRating(Object rating) {
     return Intl.message(
       '★ $rating+',
       name: 'filterRating',
@@ -992,12 +1050,10 @@ class S {
     );
   }
 
-  /// `{count, plural, =1{1 result for “{query}”} other{{count} results for “{query}”}}`
-  String searchResultsCount(int count, String query) {
-    return Intl.plural(
-      count,
-      one: '1 result for “$query”',
-      other: '$count results for “$query”',
+  /// `{count} results for “{query}”`
+  String searchResultsCount(Object count, Object query) {
+    return Intl.message(
+      '$count results for “$query”',
       name: 'searchResultsCount',
       desc: '',
       args: [count, query],
@@ -1005,7 +1061,7 @@ class S {
   }
 
   /// `No results for “{query}”`
-  String searchNoResults(String query) {
+  String searchNoResults(Object query) {
     return Intl.message(
       'No results for “$query”',
       name: 'searchNoResults',
@@ -1065,17 +1121,17 @@ class S {
   }
 
   /// `{count} reviews`
-  String reviewsCount(String count) {
+  String reviewsCount(Object count) {
     return Intl.message(
       '$count reviews',
       name: 'reviewsCount',
-      desc: 'count is formatted, e.g. 1.2k',
+      desc: '',
       args: [count],
     );
   }
 
   /// `{percent}% off on orders above EGP {amount}`
-  String offerAbove(int percent, String amount) {
+  String offerAbove(Object percent, Object amount) {
     return Intl.message(
       '$percent% off on orders above EGP $amount',
       name: 'offerAbove',
@@ -1125,7 +1181,7 @@ class S {
   }
 
   /// `({reviews}) · {kcal} kcal`
-  String caloriesInfo(int reviews, int kcal) {
+  String caloriesInfo(Object reviews, Object kcal) {
     return Intl.message(
       '($reviews) · $kcal kcal',
       name: 'caloriesInfo',
@@ -1155,7 +1211,7 @@ class S {
   }
 
   /// `Add · EGP {amount}`
-  String addToCartWithPrice(String amount) {
+  String addToCartWithPrice(Object amount) {
     return Intl.message(
       'Add · EGP $amount',
       name: 'addToCartWithPrice',
@@ -1175,7 +1231,7 @@ class S {
   }
 
   /// `Delivery in {min}–{max} min`
-  String deliveryIn(int min, int max) {
+  String deliveryIn(Object min, Object max) {
     return Intl.message(
       'Delivery in $min–$max min',
       name: 'deliveryIn',
@@ -1195,7 +1251,7 @@ class S {
   }
 
   /// `{code} applied`
-  String promoApplied(String code) {
+  String promoApplied(Object code) {
     return Intl.message(
       '$code applied',
       name: 'promoApplied',
@@ -1205,7 +1261,7 @@ class S {
   }
 
   /// `You saved EGP {amount} on this order`
-  String youSaved(String amount) {
+  String youSaved(Object amount) {
     return Intl.message(
       'You saved EGP $amount on this order',
       name: 'youSaved',
@@ -1245,7 +1301,7 @@ class S {
   }
 
   /// `Discount ({code})`
-  String discountWithCode(String code) {
+  String discountWithCode(Object code) {
     return Intl.message(
       'Discount ($code)',
       name: 'discountWithCode',
@@ -1355,7 +1411,7 @@ class S {
   }
 
   /// `Expires {date}`
-  String cardExpires(String date) {
+  String cardExpires(Object date) {
     return Intl.message(
       'Expires $date',
       name: 'cardExpires',
@@ -1415,7 +1471,7 @@ class S {
   }
 
   /// `{km} km away`
-  String distanceAway(String km) {
+  String distanceAway(Object km) {
     return Intl.message(
       '$km km away',
       name: 'distanceAway',
@@ -1425,7 +1481,7 @@ class S {
   }
 
   /// `Order #{number}`
-  String orderNumber(String number) {
+  String orderNumber(Object number) {
     return Intl.message(
       'Order #$number',
       name: 'orderNumber',
@@ -1525,7 +1581,7 @@ class S {
   }
 
   /// `Active ({count})`
-  String activeOrdersTab(int count) {
+  String activeOrdersTab(Object count) {
     return Intl.message(
       'Active ($count)',
       name: 'activeOrdersTab',
@@ -1685,7 +1741,7 @@ class S {
   }
 
   /// `{count} saved`
-  String savedCount(int count) {
+  String savedCount(Object count) {
     return Intl.message(
       '$count saved',
       name: 'savedCount',
