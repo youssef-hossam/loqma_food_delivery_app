@@ -4,6 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:loqma_food_delivery_app/app.dart';
+import 'package:loqma_food_delivery_app/core/error/error_handler.dart';
+import 'package:loqma_food_delivery_app/core/error/failure.dart';
 import 'package:loqma_food_delivery_app/core/localization/locale_controller.dart';
 import 'package:loqma_food_delivery_app/core/router/app_router.dart';
 import 'package:loqma_food_delivery_app/core/utils/cache/cache_helper.dart';
@@ -12,12 +14,23 @@ import 'package:loqma_food_delivery_app/features/auth/data/models/login_request_
 import 'package:loqma_food_delivery_app/features/onboarding/data/onboarding_repository_impl.dart';
 
 Future<void> main() async {
-  final api = AuthApiService(Dio());
-  final res = await api.login(
-    const LoginRequestBody(email: 'demo@loqma.app', password: 'Passw0rd!'),
-  );
-  log(res.data.user.name);
-  log(res.data.tokens.accessToken);
+  // final api = AuthApiService(Dio());
+  // try {
+  //   await api.login(
+  //     const LoginRequestBody(email: 'demo@loqma.app', password: 'wrong'),
+  //   );
+  // } catch (e) {
+  //   final f = ErrorHandler.handle(e);
+  //   print(f.runtimeType); // ServerFailure
+  //   if (f is ServerFailure)
+  //     print('${f.code} - ${f.message}'); // INVALID_CREDENTIALS - ...
+  // }
+
+  // final res = await api.login(
+  //   const LoginRequestBody(email: 'demo@loqma.app', password: 'Passw0rd!'),
+  // );
+  // log(res.data.user.name);
+  // log(res.data.tokens.accessToken);
   //   String jsonString = '''{
   //     "success": true,
   //     "data": {

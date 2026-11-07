@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:loqma_food_delivery_app/core/utils/cache/cache_constants.dart';
+import 'package:loqma_food_delivery_app/core/constants/cache_constants.dart';
 import 'package:loqma_food_delivery_app/core/utils/cache/cache_helper.dart';
 
 // null = use the device language
