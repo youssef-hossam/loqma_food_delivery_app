@@ -7,16 +7,6 @@ import 'package:loqma_food_delivery_app/core/widgets/loqma_logo.dart';
 import 'package:loqma_food_delivery_app/features/onboarding/domain/onboarding_repository.dart';
 import 'package:loqma_food_delivery_app/features/splash/presentation/widgets/ring.dart';
 
-/// Second (Flutter) splash — same motion as the Figma prototype:
-/// hold the native frame briefly, then ONE 900 ms ease-out-back move where
-/// everything animates together (like Figma's Smart Animate), then continue.
-///
-/// Smoothness rules used here:
-/// - Nothing is rebuilt per frame: each animated piece is built once and passed
-///   as `child`; only cheap transforms / opacity layers change.
-/// - The SVGs are drawn once at a fixed size and only scaled (no relayout,
-///   no colour filter recomputed every frame).
-/// - Fades use FadeTransition (an opacity layer) instead of Opacity widgets.
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key, required this.onboardingRepository});
 
@@ -32,16 +22,15 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
   late final Animation<double> _move = CurvedAnimation(parent: _c, curve: Curves.easeOutBack);
   late final Animation<double> _fade = CurvedAnimation(parent: _c, curve: Curves.easeOut);
 
-  // Sizes from the Figma frames "00 · Splash" → "00 · Splash · Logo".
-  static const double _arWidth = 150; // same as the native splash image
+  static const double _arWidth = 150;
   static const double _arEndScale = 71 / 150;
-  static const double _arHeight = _arWidth / (51 / 24); // logo_ar.svg aspect
+  static const double _arHeight = _arWidth / (51 / 24);
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      FlutterNativeSplash.remove(); // our first frame is identical → no jump
+      FlutterNativeSplash.remove();
       _start();
     });
   }
@@ -65,15 +54,13 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    final c = context.loqma;
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
-        backgroundColor: c.primary,
+        backgroundColor: context.loqma.primary,
         body: Stack(
           fit: StackFit.expand,
           children: [
-            // gradient fades in over the flat native colour
             FadeTransition(
               opacity: _fade,
               child: DecoratedBox(
@@ -81,12 +68,11 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
                   gradient: LinearGradient(
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
-                    colors: [c.primary, c.primaryPressed],
+                    colors: [context.loqma.primary, context.loqma.primaryPressed],
                   ),
                 ),
               ),
             ),
-            // rings grow out from the centre
             for (final size in const [260.0, 180.0])
               Center(
                 child: FadeTransition(
@@ -99,7 +85,6 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
                   ),
                 ),
               ),
-            // "loqma." appears above
             Center(
               child: FadeTransition(
                 opacity: _fade,
@@ -113,7 +98,6 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
                 ),
               ),
             ),
-            // "لُقْمَة" shrinks into place; white → peach as a cross-fade
             Center(
               child: _Move(
                 animation: _move,
@@ -141,7 +125,6 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
   }
 }
 
-/// Moves/scales an already-built [child]; only the transform changes per frame.
 class _Move extends StatelessWidget {
   const _Move({required this.animation, required this.offset, required this.scale, required this.child});
 

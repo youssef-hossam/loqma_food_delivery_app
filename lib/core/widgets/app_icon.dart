@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-/// Icon from assets/icons (exported from Figma), tinted with [color].
 class AppIcon extends StatelessWidget {
   const AppIcon(this.name, {super.key, this.size = 20, this.color});
 

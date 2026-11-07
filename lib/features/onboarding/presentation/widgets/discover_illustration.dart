@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:loqma_food_delivery_app/core/extensions/context_extensions.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_colors.dart';
-import 'package:loqma_food_delivery_app/features/onboarding/presentation/widgets/onboarding_animations.dart';
+import 'package:loqma_food_delivery_app/core/widgets/app_animations.dart';
 import 'package:loqma_food_delivery_app/features/onboarding/presentation/widgets/onboarding_parts.dart';
-import 'package:loqma_food_delivery_app/generated/l10n.dart';
 
-/// Page 1 · "00 · Onboarding 1 · Discover"
 class DiscoverIllustration extends StatelessWidget {
   const DiscoverIllustration({super.key});
 
@@ -40,7 +39,7 @@ class DiscoverIllustration extends StatelessWidget {
               delay: const Duration(milliseconds: 450),
               fromScale: 0.8,
               fromOffset: const Offset(0, 24),
-              child: FloatingChip(label: S.of(context).onboardingRestaurantsCount(500)),
+              child: FloatingChip(label: context.s.onboardingRestaurantsCount(500)),
             ),
           ),
         ),

@@ -1,7 +1,6 @@
-// GENERATED from Figma (Dimension collection).
 import 'package:flutter/material.dart';
 
-abstract final class AppSpacing {
+class AppSpacing {
   static const double s4 = 4;
   static const double s8 = 8;
   static const double s12 = 12;
@@ -11,7 +10,7 @@ abstract final class AppSpacing {
   static const double s32 = 32;
 }
 
-abstract final class AppRadius {
+class AppRadius {
   static const double sm = 10;
   static const double md = 14;
   static const double lg = 20;

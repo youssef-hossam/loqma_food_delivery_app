@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loqma_food_delivery_app/core/extensions/context_extensions.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_colors.dart';
 import 'package:loqma_food_delivery_app/core/widgets/language_toggle.dart';
 import 'package:loqma_food_delivery_app/core/widgets/loqma_logo.dart';
-import 'package:loqma_food_delivery_app/generated/l10n.dart';
 
-/// "loqma. لُقْمَة" · language toggle · Skip  (flips automatically in RTL)
 class OnboardingHeader extends StatelessWidget {
   const OnboardingHeader({super.key, required this.onSkip});
 
@@ -13,30 +12,37 @@ class OnboardingHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.loqma;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Row(
         children: [
-          LoqmaLogo.en(height: 22.r, color: c.primaryPressed),
+          LoqmaLogo.en(height: 22.r, color: context.loqma.primaryPressed),
           SizedBox(width: 8.w),
-          LoqmaLogo.ar(height: 20.r, color: c.primaryPressed),
+          LoqmaLogo.ar(height: 20.r, color: context.loqma.primaryPressed),
           const Spacer(),
           const LanguageToggle(),
-          SizedBox(width: 8.w),
-          Material(
-            color: c.card,
-            shape: const StadiumBorder(),
-            child: InkWell(
-              customBorder: const StadiumBorder(),
-              onTap: onSkip,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
-                child: Text(
-                  S.of(context).skip,
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(color: c.textSecondary),
+          SizedBox(width: 4.w),
+          TextButton(
+            onPressed: onSkip,
+            style: TextButton.styleFrom(
+              foregroundColor: context.loqma.textSecondary,
+              padding: EdgeInsets.symmetric(horizontal: 8.w),
+              minimumSize: Size(0, 34.h),
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  context.s.skip,
+                  style: context.text.labelLarge?.copyWith(
+                        color: context.loqma.textSecondary,
+                        fontSize: 14.sp,
+                      ),
                 ),
-              ),
+                SizedBox(width: 4.w),
+                Icon(Icons.arrow_forward_ios_rounded, size: 12.r, color: context.loqma.textSecondary),
+              ],
             ),
           ),
         ],

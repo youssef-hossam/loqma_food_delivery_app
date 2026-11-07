@@ -1,5 +1,3 @@
-// GENERATED from Figma (Color collection: Light + Dark modes).
-// Source of truth: docs/design/figma-tokens.json
 import 'package:flutter/material.dart';
 
 @immutable
@@ -218,7 +216,7 @@ class LoqmaColors extends ThemeExtension<LoqmaColors> {
   }
 }
 
+
 extension LoqmaColorsX on BuildContext {
-  /// Usage: context.loqma.primary
   LoqmaColors get loqma => Theme.of(this).extension<LoqmaColors>()!;
 }

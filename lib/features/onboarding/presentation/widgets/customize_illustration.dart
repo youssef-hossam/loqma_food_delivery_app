@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:loqma_food_delivery_app/core/extensions/context_extensions.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_colors.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_shadows.dart';
 import 'package:loqma_food_delivery_app/core/widgets/app_icon.dart';
-import 'package:loqma_food_delivery_app/features/onboarding/presentation/widgets/onboarding_animations.dart';
+import 'package:loqma_food_delivery_app/core/widgets/app_animations.dart';
 import 'package:loqma_food_delivery_app/features/onboarding/presentation/widgets/onboarding_parts.dart';
-import 'package:loqma_food_delivery_app/generated/l10n.dart';
 
-/// Page 2 · "00 · Onboarding 2 · Customize"
 class CustomizeIllustration extends StatelessWidget {
   const CustomizeIllustration({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final c = context.loqma;
     return IllustrationCanvas(
       children: [
         const Positioned(
@@ -33,9 +31,9 @@ class CustomizeIllustration extends StatelessWidget {
             child: Container(
               width: 56,
               height: 56,
-              decoration: BoxDecoration(color: c.primary, shape: BoxShape.circle, boxShadow: AppShadows.primaryGlow),
+              decoration: BoxDecoration(color: context.loqma.primary, shape: BoxShape.circle, boxShadow: AppShadows.primaryGlow),
               alignment: Alignment.center,
-              child: AppIcon('check', size: 26, color: c.textOnPrimary),
+              child: AppIcon('check', size: 26, color: context.loqma.textOnPrimary),
             ),
           ),
         ),
@@ -49,13 +47,10 @@ class _DishCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.loqma;
-    final t = Theme.of(context).textTheme;
-    final s = S.of(context);
     return Container(
       width: 300,
       padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(color: c.card, borderRadius: BorderRadius.circular(20), boxShadow: AppShadows.card),
+      decoration: BoxDecoration(color: context.loqma.card, borderRadius: BorderRadius.circular(20), boxShadow: AppShadows.card),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -73,8 +68,8 @@ class _DishCard extends StatelessWidget {
           const SizedBox(height: 10),
           Row(
             children: [
-              Expanded(child: Text(s.onboardingDemoDish, style: t.titleMedium?.copyWith(color: c.textPrimary))),
-              Text(s.price('300'), style: t.titleMedium?.copyWith(color: c.primary)),
+              Expanded(child: Text(context.s.onboardingDemoDish, style: context.text.titleMedium?.copyWith(color: context.loqma.textPrimary))),
+              Text(context.s.price('300'), style: context.text.titleMedium?.copyWith(color: context.loqma.primary)),
             ],
           ),
           const SizedBox(height: 10),
@@ -82,10 +77,10 @@ class _DishCard extends StatelessWidget {
             spacing: 8,
             runSpacing: 8,
             children: [
-              _Option(s.onboardingDemoDouble, background: c.primary, foreground: c.textOnPrimary),
-              _Option(s.onboardingDemoCheddar, background: c.primarySoft, foreground: c.primary),
-              _Option(s.onboardingDemoBacon, background: c.primarySoft, foreground: c.primary),
-              _Option(s.onboardingDemoNoPickles, background: c.muted, foreground: c.textSecondary),
+              _Option(context.s.onboardingDemoDouble, background: context.loqma.primary, foreground: context.loqma.textOnPrimary),
+              _Option(context.s.onboardingDemoCheddar, background: context.loqma.primarySoft, foreground: context.loqma.primary),
+              _Option(context.s.onboardingDemoBacon, background: context.loqma.primarySoft, foreground: context.loqma.primary),
+              _Option(context.s.onboardingDemoNoPickles, background: context.loqma.muted, foreground: context.loqma.textSecondary),
             ],
           ),
         ],
@@ -106,7 +101,7 @@ class _Option extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
       decoration: BoxDecoration(color: background, borderRadius: BorderRadius.circular(999)),
-      child: Text(label, style: Theme.of(context).textTheme.labelSmall?.copyWith(color: foreground)),
+      child: Text(label, style: context.text.labelSmall?.copyWith(color: foreground)),
     );
   }
 }

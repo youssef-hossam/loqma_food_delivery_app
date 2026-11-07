@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class Ring extends StatelessWidget {

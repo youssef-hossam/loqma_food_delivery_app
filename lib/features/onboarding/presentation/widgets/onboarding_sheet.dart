@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loqma_food_delivery_app/core/extensions/context_extensions.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_colors.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_shadows.dart';
 import 'package:loqma_food_delivery_app/core/widgets/highlighted_text.dart';
 import 'package:loqma_food_delivery_app/core/widgets/loqma_button.dart';
 import 'package:loqma_food_delivery_app/features/onboarding/presentation/widgets/pager_dots.dart';
 
-/// White bottom sheet: dots · title · body · button. Text cross-fades between pages.
 class OnboardingSheet extends StatelessWidget {
   const OnboardingSheet({
     super.key,
@@ -27,13 +27,11 @@ class OnboardingSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.loqma;
-    final t = Theme.of(context).textTheme;
     return Container(
       width: double.infinity,
       padding: EdgeInsets.fromLTRB(24.w, 28.h, 24.w, 20.h + MediaQuery.paddingOf(context).bottom),
       decoration: BoxDecoration(
-        color: c.sheet,
+        color: context.loqma.sheet,
         borderRadius: BorderRadius.vertical(top: Radius.circular(32.r)),
         boxShadow: AppShadows.float,
       ),
@@ -63,13 +61,13 @@ class OnboardingSheet extends StatelessWidget {
               children: [
                 HighlightedText(
                   title,
-                  style: t.displayLarge?.copyWith(fontSize: 32.sp),
-                  highlightColor: c.primary,
+                  style: context.text.displayLarge?.copyWith(fontSize: 32.sp),
+                  highlightColor: context.loqma.primary,
                 ),
                 SizedBox(height: 12.h),
                 ConstrainedBox(
                   constraints: BoxConstraints(minHeight: 44.h, maxWidth: 300.w),
-                  child: Text(body, textAlign: TextAlign.center, style: t.bodySmall?.copyWith(fontSize: 14.sp)),
+                  child: Text(body, textAlign: TextAlign.center, style: context.text.bodySmall?.copyWith(fontSize: 14.sp)),
                 ),
               ],
             ),

@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-/// Pops a child in once (scale + fade + optional slide), after [delay].
-/// Same feel as the "Intro → Float A" step of the Figma hero components.
 class PopIn extends StatefulWidget {
   const PopIn({
     super.key,
@@ -64,7 +62,6 @@ class _PopInState extends State<PopIn> with SingleTickerProviderStateMixin {
   }
 }
 
-/// Gentle up/down float loop ("Float A ⇄ Float B" in Figma).
 class Floating extends StatefulWidget {
   const Floating({
     super.key,
@@ -78,7 +75,6 @@ class Floating extends StatefulWidget {
   final double distance;
   final Duration period;
 
-  /// 0..1 — start offset so items don't all move together.
   final double phase;
 
   @override

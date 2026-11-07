@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loqma_food_delivery_app/core/extensions/context_extensions.dart';
 import 'package:loqma_food_delivery_app/core/localization/locale_controller.dart';
 import 'package:loqma_food_delivery_app/core/router/app_router.dart';
 import 'package:loqma_food_delivery_app/core/router/routes.dart';
@@ -15,19 +16,19 @@ class LoqmaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Figma frames are 390 × 844 → every .w/.h/.sp/.r is scaled from that.
+    // figma frame size
     return ScreenUtilInit(
       designSize: const Size(390, 844),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) => LocaleScope(
         controller: localeController,
-        child: ValueListenableBuilder<Locale>(
+        child: ValueListenableBuilder<Locale?>(
           valueListenable: localeController,
           builder: (context, locale, _) {
-            final arabic = locale.languageCode == 'ar';
+            final arabic = localeController.isArabic;
             return MaterialApp(
-              onGenerateTitle: (context) => S.of(context).appName,
+              onGenerateTitle: (context) => context.s.appName,
               debugShowCheckedModeBanner: false,
               locale: locale,
               supportedLocales: S.delegate.supportedLocales,

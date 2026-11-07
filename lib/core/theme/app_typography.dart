@@ -1,4 +1,3 @@
-// GENERATED from Figma (text styles EN = Plus Jakarta Sans, AR = Cairo).
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -31,7 +30,6 @@ class LoqmaTypography {
   final TextStyle button;
   final TextStyle overline;
 
-  /// English (LTR) type scale.
   factory LoqmaTypography.en() => LoqmaTypography._(
     display: GoogleFonts.plusJakartaSans(
       fontWeight: FontWeight.w800,
@@ -101,7 +99,6 @@ class LoqmaTypography {
     ),
   );
 
-  /// Arabic (RTL) type scale.
   factory LoqmaTypography.ar() => LoqmaTypography._(
     display: GoogleFonts.cairo(
       fontWeight: FontWeight.w800,
@@ -171,7 +168,6 @@ class LoqmaTypography {
     ),
   );
 
-  /// Maps the scale onto Material slots, colored from the active palette.
   TextTheme toTextTheme(LoqmaColors c) {
     return TextTheme(
       displayLarge: display.copyWith(color: c.textPrimary),

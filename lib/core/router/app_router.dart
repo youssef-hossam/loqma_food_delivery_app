@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:loqma_food_delivery_app/core/extensions/context_extensions.dart';
 import 'package:loqma_food_delivery_app/core/router/router_transitions.dart';
 import 'package:loqma_food_delivery_app/core/router/routes.dart';
+import 'package:loqma_food_delivery_app/features/auth/presentation/pages/login_page.dart';
+import 'package:loqma_food_delivery_app/features/auth/presentation/pages/register_page.dart';
 import 'package:loqma_food_delivery_app/features/onboarding/domain/onboarding_repository.dart';
 import 'package:loqma_food_delivery_app/features/onboarding/presentation/pages/on_boarding_page.dart';
 import 'package:loqma_food_delivery_app/features/splash/presentation/pages/splash_page.dart';
@@ -22,8 +25,9 @@ class AppRouter {
           OnBoardingPage(onboardingRepository: onboardingRepository),
         );
       case Routes.login:
-        // TODO: replace with LoginView
-        return RouterTransitions.buildFade(const _ComingSoon(title: 'Login'));
+        return RouterTransitions.buildFade(const LoginPage());
+      case Routes.register:
+        return RouterTransitions.buildHorizontal(const RegisterPage());
       case Routes.home:
         // TODO: replace with HomeView
         return RouterTransitions.buildHorizontal(
@@ -46,7 +50,7 @@ class _ComingSoon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(title, style: Theme.of(context).textTheme.headlineMedium),
+        child: Text(title, style: context.text.headlineMedium),
       ),
     );
   }

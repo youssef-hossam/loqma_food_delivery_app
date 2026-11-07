@@ -1,21 +1,19 @@
 import 'dart:math' as math;
 import 'dart:ui' show PathMetric;
-
 import 'package:flutter/material.dart';
+import 'package:loqma_food_delivery_app/core/extensions/context_extensions.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_colors.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_shadows.dart';
 import 'package:loqma_food_delivery_app/core/widgets/app_icon.dart';
-import 'package:loqma_food_delivery_app/features/onboarding/presentation/widgets/onboarding_animations.dart';
+import 'package:loqma_food_delivery_app/core/widgets/app_animations.dart';
 import 'package:loqma_food_delivery_app/features/onboarding/presentation/widgets/onboarding_parts.dart';
-import 'package:loqma_food_delivery_app/generated/l10n.dart';
 
-/// Page 3 · "00 · Onboarding 3 · Track" — the rider drives along the dashed route.
+
 class TrackIllustration extends StatelessWidget {
   const TrackIllustration({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final c = context.loqma;
     return IllustrationCanvas(
       children: [
         const Positioned(
@@ -34,9 +32,9 @@ class TrackIllustration extends StatelessWidget {
               leading: Container(
                 width: 8,
                 height: 8,
-                decoration: BoxDecoration(color: c.success, shape: BoxShape.circle),
+                decoration: BoxDecoration(color: context.loqma.success, shape: BoxShape.circle),
               ),
-              label: S.of(context).onboardingArrivingIn(12),
+              label: context.s.onboardingArrivingIn(12),
             ),
           ),
         ),
@@ -70,7 +68,6 @@ class _MiniMapState extends State<_MiniMap> with SingleTickerProviderStateMixin 
 
   @override
   Widget build(BuildContext context) {
-    final c = context.loqma;
     return Container(
       width: _size.width,
       height: _size.height,
@@ -79,39 +76,39 @@ class _MiniMapState extends State<_MiniMap> with SingleTickerProviderStateMixin 
         borderRadius: BorderRadius.circular(28),
         child: Stack(
           children: [
-            Positioned.fill(child: ColoredBox(color: c.mapLand)),
-            Positioned(left: 20, top: 40, child: _block(90, 70, c.mapPark)),
-            Positioned(left: 230, top: 230, child: _block(120, 90, c.mapWater)),
+            Positioned.fill(child: ColoredBox(color: context.loqma.mapLand)),
+            Positioned(left: 20, top: 40, child: _block(90, 70, context.loqma.mapPark)),
+            Positioned(left: 230, top: 230, child: _block(120, 90, context.loqma.mapWater)),
             Positioned(
               left: -40,
               top: 200,
-              child: Transform.rotate(angle: -0.22, child: _block(430, 40, c.mapRoad)),
+              child: Transform.rotate(angle: -0.22, child: _block(430, 40, context.loqma.mapRoad)),
             ),
             Positioned(
               left: 170,
               top: -40,
-              child: Transform.rotate(angle: 0.14, child: _block(40, 430, c.mapRoad)),
+              child: Transform.rotate(angle: 0.14, child: _block(40, 430, context.loqma.mapRoad)),
             ),
-            Positioned.fill(child: CustomPaint(painter: _RoutePainter(path: _route, color: c.primary))),
+            Positioned.fill(child: CustomPaint(painter: _RoutePainter(path: _route, color: context.loqma.primary))),
             Positioned(
               left: 40,
               top: 58,
               child: Container(
                 width: 44,
                 height: 44,
-                decoration: BoxDecoration(color: c.night, borderRadius: BorderRadius.circular(14)),
+                decoration: BoxDecoration(color: context.loqma.night, borderRadius: BorderRadius.circular(14)),
                 alignment: Alignment.center,
                 child: const AppIcon('store', size: 20, color: Colors.white),
               ),
             ),
-            Positioned(left: 262, top: 258, child: AppIcon('pin', size: 40, color: c.textPrimary)),
+            Positioned(left: 262, top: 258, child: AppIcon('pin', size: 40, color: context.loqma.textPrimary)),
             Positioned.fill(
               child: AnimatedBuilder(
                 animation: _ride,
                 child: Container(
                   width: 48,
                   height: 48,
-                  decoration: BoxDecoration(color: c.primary, shape: BoxShape.circle, boxShadow: AppShadows.primaryGlow),
+                  decoration: BoxDecoration(color: context.loqma.primary, shape: BoxShape.circle, boxShadow: AppShadows.primaryGlow),
                   alignment: Alignment.center,
                   child: const AppIcon('bike', size: 22, color: Colors.white),
                 ),

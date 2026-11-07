@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_colors.dart';
 
-/// Active dot 28 wide, others 8 — animates between pages.
 class PagerDots extends StatelessWidget {
   const PagerDots({super.key, required this.count, required this.index});
 
@@ -11,7 +10,6 @@ class PagerDots extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.loqma;
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: List.generate(count, (i) {
@@ -23,7 +21,7 @@ class PagerDots extends StatelessWidget {
           width: active ? 28.w : 8.w,
           height: 8.w,
           decoration: BoxDecoration(
-            color: active ? c.primary : c.borderStrong,
+            color: active ? context.loqma.primary : context.loqma.borderStrong,
             borderRadius: BorderRadius.circular(8),
           ),
         );

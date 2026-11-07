@@ -4,13 +4,7 @@ import 'app_colors.dart';
 import 'app_spacing.dart';
 import 'app_typography.dart';
 
-/// Usage in main.dart:
-/// MaterialApp.router(
-///   theme: LoqmaTheme.light(arabic: isArabic),
-///   darkTheme: LoqmaTheme.dark(arabic: isArabic),
-///   themeMode: ThemeMode.system,
-/// )
-abstract final class LoqmaTheme {
+class LoqmaTheme {
   static ThemeData light({bool arabic = false}) =>
       _build(LoqmaColors.light, Brightness.light, arabic);
 

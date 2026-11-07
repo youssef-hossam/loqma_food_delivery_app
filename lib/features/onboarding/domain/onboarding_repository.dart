@@ -1,4 +1,4 @@
-abstract interface class OnboardingRepository {
+abstract class OnboardingRepository {
   Future<bool> isCompleted();
   Future<void> markCompleted();
 }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Renders "All your *cravings*" with the *starred* words in [highlightColor].
-/// The stars live in the ARB strings, so each language picks its own highlighted word.
 class HighlightedText extends StatelessWidget {
   const HighlightedText(
     this.text, {
