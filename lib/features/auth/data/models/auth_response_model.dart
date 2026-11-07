@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:loqma_food_delivery_app/features/auth/data/models/user_model.dart';
+import 'package:loqma_food_delivery_app/features/auth/domain/entities/user_entity.dart';
 
 import 'tokens_model.dart';
 part 'auth_response_model.freezed.dart';
@@ -15,4 +16,5 @@ abstract class AuthResponseModel with _$AuthResponseModel {
   factory AuthResponseModel.fromJson(Map<String, dynamic> json) =>
       _$AuthResponseModelFromJson(json);
 }
+
 

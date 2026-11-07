@@ -1,13 +1,14 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
+
 part 'register_request_body.g.dart';
 
-@JsonSerializable(createFactory: false)
-abstract class RegisterRequestBody {
+@JsonSerializable(createFactory: false, includeIfNull: false)
+class RegisterRequestBody {
   final String name;
   final String email;
   final String password;
-  final String phone;
-  final String locale;
+  final String? phone;   // اختياري
+  final String? locale;  // اختياري
   const RegisterRequestBody({
     required this.name,
     required this.email,

@@ -12,6 +12,7 @@ import 'package:loqma_food_delivery_app/core/router/app_router.dart';
 import 'package:loqma_food_delivery_app/core/utils/cache/cache_helper.dart';
 import 'package:loqma_food_delivery_app/features/auth/data/datasource/auth_api_service.dart';
 import 'package:loqma_food_delivery_app/features/auth/data/models/login_request_body.dart';
+import 'package:loqma_food_delivery_app/features/auth/domain/usecases/login_usecase.dart';
 import 'package:loqma_food_delivery_app/features/onboarding/data/onboarding_repository_impl.dart';
 
 Future<void> main() async {

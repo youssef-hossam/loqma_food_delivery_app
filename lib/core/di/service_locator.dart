@@ -4,6 +4,10 @@ import 'package:loqma_food_delivery_app/core/network/dio_factory.dart';
 import 'package:loqma_food_delivery_app/features/auth/data/datasource/auth_api_service.dart';
 import 'package:loqma_food_delivery_app/features/auth/data/datasource/auth_local_data_source.dart';
 import 'package:loqma_food_delivery_app/features/auth/data/datasource/auth_remote_data_source.dart';
+import 'package:loqma_food_delivery_app/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:loqma_food_delivery_app/features/auth/domain/repositories/auth_repository.dart';
+import 'package:loqma_food_delivery_app/features/auth/domain/usecases/login_usecase.dart';
+import 'package:loqma_food_delivery_app/features/auth/domain/usecases/register_usecase.dart';
 
 /// الـ service locator بتاع التطبيق كله.
 /// أي حتة محتاجة dependency بتطلبها كده: sl<AuthRemoteDataSource>()
@@ -34,12 +38,13 @@ void _initAuth() {
 
   // TODO: لما نعمل الـ domain والـ repository impl والـ cubit:
   // Repository (بنسجله بالـ abstract type عشان الـ domain ميعرفش الـ impl)
-  // sl.registerLazySingleton<AuthRepository>(
-  //   () => AuthRepositoryImpl(remote: sl(), local: sl()),
-  // );
+  sl.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(remoteDataSource: sl(), localDataSource: sl()),
+  );
   //
   // Use cases
-  // sl.registerLazySingleton(() => LoginUseCase(sl()));
+  sl.registerLazySingleton(() => LoginUseCase(sl()));
+  sl.registerLazySingleton(() => RegisterUseCase(sl()));
   //
   // Cubit (factory: نسخة جديدة كل مرة الشاشة تتفتح)
   // sl.registerFactory(() => LoginCubit(sl()));
