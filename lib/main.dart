@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:loqma_food_delivery_app/app.dart';
+import 'package:loqma_food_delivery_app/core/di/service_locator.dart';
 import 'package:loqma_food_delivery_app/core/error/error_handler.dart';
 import 'package:loqma_food_delivery_app/core/error/failure.dart';
 import 'package:loqma_food_delivery_app/core/localization/locale_controller.dart';
@@ -77,6 +78,7 @@ Future<void> main() async {
   FlutterNativeSplash.preserve(widgetsBinding: binding);
 
   await CacheHelper.init();
+  setupServiceLocator();
 
   runApp(
     LoqmaApp(
