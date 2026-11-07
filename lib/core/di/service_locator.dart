@@ -8,6 +8,7 @@ import 'package:loqma_food_delivery_app/features/auth/data/repositories/auth_rep
 import 'package:loqma_food_delivery_app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:loqma_food_delivery_app/features/auth/domain/usecases/login_usecase.dart';
 import 'package:loqma_food_delivery_app/features/auth/domain/usecases/register_usecase.dart';
+import 'package:loqma_food_delivery_app/features/auth/presentation/cubits/login/login_cubit.dart';
 
 /// الـ service locator بتاع التطبيق كله.
 /// أي حتة محتاجة dependency بتطلبها كده: sl<AuthRemoteDataSource>()
@@ -46,6 +47,7 @@ void _initAuth() {
   sl.registerLazySingleton(() => LoginUseCase(sl()));
   sl.registerLazySingleton(() => RegisterUseCase(sl()));
   //
-  // Cubit (factory: نسخة جديدة كل مرة الشاشة تتفتح)
   // sl.registerFactory(() => LoginCubit(sl()));
+  // every once we open the screen, we want a new instance of the cubit, so we use registerFactory
+  sl.registerFactory(() => LoginCubit(loginUseCase: sl()));
 }
