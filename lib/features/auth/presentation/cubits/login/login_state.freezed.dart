@@ -88,10 +88,7 @@ case LoginInitial():
 return initial(_that);case LoginLoading():
 return loading(_that);case LoginSuccess():
 return success(_that);case LoginFailure():
-return failure(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return failure(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -159,10 +156,7 @@ case LoginInitial():
 return initial();case LoginLoading():
 return loading();case LoginSuccess():
 return success(_that.user);case LoginFailure():
-return failure(_that.failure);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return failure(_that.failure);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///

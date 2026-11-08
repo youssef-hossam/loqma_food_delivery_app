@@ -138,8 +138,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailHint": MessageLookupByLibrary.simpleMessage("name@example.com"),
         "errorGeneric": MessageLookupByLibrary.simpleMessage(
             "Something went wrong. Please try again."),
+        "errorGenericTitle":
+            MessageLookupByLibrary.simpleMessage("Something went wrong"),
+        "errorLoginTitle":
+            MessageLookupByLibrary.simpleMessage("Couldn\'t log you in"),
+        "errorNetworkBody": MessageLookupByLibrary.simpleMessage(
+            "Check your internet connection and try again."),
+        "errorNetworkTitle":
+            MessageLookupByLibrary.simpleMessage("No connection"),
         "errorNoInternet":
             MessageLookupByLibrary.simpleMessage("No internet connection"),
+        "errorRateLimitedTitle":
+            MessageLookupByLibrary.simpleMessage("Slow down a little"),
         "errorSessionExpired": MessageLookupByLibrary.simpleMessage(
             "Your session expired. Please log in again."),
         "extraPrice": m9,
@@ -155,6 +165,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fullName": MessageLookupByLibrary.simpleMessage("Full name"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get started"),
         "goToCheckout": MessageLookupByLibrary.simpleMessage("Go to checkout"),
+        "gotIt": MessageLookupByLibrary.simpleMessage("Got it"),
         "homeGreeting": m11,
         "itemsCount": m12,
         "language": MessageLookupByLibrary.simpleMessage("Language"),
@@ -300,6 +311,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "upToCount": m32,
         "validationEmail":
             MessageLookupByLibrary.simpleMessage("Enter a valid email"),
+        "validationName": MessageLookupByLibrary.simpleMessage("Name should be at least 2 characters"),
+        "validationTerms": MessageLookupByLibrary.simpleMessage("Please accept the terms to continue"),
         "validationPasswordWeak": MessageLookupByLibrary.simpleMessage(
             "Use 8+ characters with a letter and a number"),
         "validationPhone":

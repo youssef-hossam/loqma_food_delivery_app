@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:loqma_food_delivery_app/core/network/interceptors/language_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 /// Dio واحد للتطبيق كله.
@@ -14,7 +15,10 @@ class DioFactory {
       ..receiveTimeout = const Duration(seconds: 20)
       ..sendTimeout = const Duration(seconds: 20);
 
-    // TODO: interceptor الـ Authorization و Accept-Language هيتضاف هنا (قبل الـ logger)
+    // الترتيب مهم: الـ interceptors اللي بتزود headers الأول، والـ logger في الآخر
+    // عشان يطبع الـ request بعد ما الـ headers اتحطت.
+    _dio.interceptors.add(LanguageInterceptor());
+    // TODO: interceptor الـ Authorization (والـ refresh token) هيتضاف هنا
 
     _dio.interceptors.add(
       PrettyDioLogger(

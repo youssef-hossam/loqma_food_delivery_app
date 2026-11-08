@@ -380,6 +380,26 @@ class S {
     );
   }
 
+  /// `Name should be at least 2 characters`
+  String get validationName {
+    return Intl.message(
+      'Name should be at least 2 characters',
+      name: 'validationName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please accept the terms to continue`
+  String get validationTerms {
+    return Intl.message(
+      'Please accept the terms to continue',
+      name: 'validationTerms',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `This field is required`
   String get validationRequired {
     return Intl.message(
@@ -1795,6 +1815,66 @@ class S {
     return Intl.message(
       'Log out',
       name: 'logOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No connection`
+  String get errorNetworkTitle {
+    return Intl.message(
+      'No connection',
+      name: 'errorNetworkTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check your internet connection and try again.`
+  String get errorNetworkBody {
+    return Intl.message(
+      'Check your internet connection and try again.',
+      name: 'errorNetworkBody',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Couldn't log you in`
+  String get errorLoginTitle {
+    return Intl.message(
+      'Couldn\'t log you in',
+      name: 'errorLoginTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Slow down a little`
+  String get errorRateLimitedTitle {
+    return Intl.message(
+      'Slow down a little',
+      name: 'errorRateLimitedTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something went wrong`
+  String get errorGenericTitle {
+    return Intl.message(
+      'Something went wrong',
+      name: 'errorGenericTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Got it`
+  String get gotIt {
+    return Intl.message(
+      'Got it',
+      name: 'gotIt',
       desc: '',
       args: [],
     );

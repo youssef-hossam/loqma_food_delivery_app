@@ -6,7 +6,8 @@ import 'package:loqma_food_delivery_app/core/theme/app_shadows.dart';
 import 'package:loqma_food_delivery_app/core/widgets/language_toggle.dart';
 
 class AuthHeader extends StatelessWidget {
-  const AuthHeader({super.key});
+  final bool isLoginPage;
+  const AuthHeader({super.key, this.isLoginPage = false});
 
   void _goBack(BuildContext context) {
     if (Navigator.canPop(context)) {
@@ -21,19 +22,25 @@ class AuthHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          width: 44.r,
-          height: 44.r,
-          decoration: BoxDecoration(
-            color: context.loqma.card,
-            shape: BoxShape.circle,
-            boxShadow: AppShadows.card,
-          ),
-          child: IconButton(
-            onPressed: () => _goBack(context),
-            icon: Icon(Icons.arrow_back_ios_new_rounded, size: 18.r, color: context.loqma.textPrimary),
-          ),
-        ),
+        isLoginPage
+            ? Container(
+                width: 44.r,
+                height: 44.r,
+                decoration: BoxDecoration(
+                  color: context.loqma.card,
+                  shape: BoxShape.circle,
+                  boxShadow: AppShadows.card,
+                ),
+                child: IconButton(
+                  onPressed: () => _goBack(context),
+                  icon: Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                    size: 18.r,
+                    color: context.loqma.textPrimary,
+                  ),
+                ),
+              )
+            : SizedBox(width: 44.r, height: 44.r),
         const Spacer(),
         const LanguageToggle(),
       ],

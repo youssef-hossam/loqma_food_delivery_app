@@ -1,4 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:loqma_food_delivery_app/core/constants/cache_constants.dart';
+import 'package:loqma_food_delivery_app/core/localization/locale_controller.dart';
+import 'package:loqma_food_delivery_app/core/utils/cache/cache_helper.dart';
 import 'package:loqma_food_delivery_app/core/error/error_handler.dart';
 import 'package:loqma_food_delivery_app/core/error/failure.dart';
 import 'package:loqma_food_delivery_app/features/auth/data/datasource/auth_local_data_source.dart';
@@ -29,7 +32,7 @@ class AuthRepositoryImpl extends AuthRepository {
       );
       await localDataSource.saveTokens(res.tokens);
       return Right(res.user.toEntity());
-    } on Exception catch (e) {
+    } catch (e) {
       return left(ErrorHandler.handle(e));
     }
   }
@@ -47,14 +50,27 @@ class AuthRepositoryImpl extends AuthRepository {
           name: name,
           email: email,
           password: password,
-          phone: phone,
-          locale: '',
+          phone: _toInternationalPhone(phone),
+          locale: _currentLanguage(),
         ),
       );
       await localDataSource.saveTokens(res.tokens);
       return Right(res.user.toEntity());
-    } on Exception catch (e) {
+    } catch (e) {
       return left(ErrorHandler.handle(e));
     }
+  }
+
+  // الباك إند عايز الرقم بكود الدولة: 01140710570 → +201140710570
+  String? _toInternationalPhone(String? phone) {
+    if (phone == null || phone.isEmpty) return null;
+    if (phone.startsWith('0')) return '+2$phone';
+    return '+20$phone';
+  }
+
+  // اللغة اللي المستخدم اختارها، ولو مختارش → لغة الجهاز
+  String _currentLanguage() {
+    return CacheHelper.getString(key: CacheConstants.languageCode) ??
+        LocaleController.deviceLocale().languageCode;
   }
 }

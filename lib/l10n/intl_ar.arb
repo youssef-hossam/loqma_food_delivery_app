@@ -33,6 +33,8 @@
   "errorGeneric": "حصلت مشكلة، جرّب تاني.",
   "errorNoInternet": "مفيش اتصال بالإنترنت",
   "errorSessionExpired": "الجلسة خلصت، سجّل دخول تاني.",
+  "validationName": "الاسم لازم يكون حرفين على الأقل",
+  "validationTerms": "لازم توافق على الشروط عشان تكمل",
   "validationRequired": "الخانة دي مطلوبة",
   "validationEmail": "اكتب إيميل صحيح",
   "validationPhone": "اكتب رقم موبايل صحيح",
@@ -174,5 +176,11 @@
   "notifications": "الإشعارات",
   "toggleOn": "شغّال",
   "toggleOff": "مقفول",
-  "logOut": "تسجيل الخروج"
+  "logOut": "تسجيل الخروج",
+  "errorNetworkTitle": "مفيش اتصال",
+  "errorNetworkBody": "اتأكد إن النت شغال وحاول تاني.",
+  "errorLoginTitle": "مقدرناش ندخّلك",
+  "errorRateLimitedTitle": "استنى شوية",
+  "errorGenericTitle": "حصلت مشكلة",
+  "gotIt": "تمام"
 }

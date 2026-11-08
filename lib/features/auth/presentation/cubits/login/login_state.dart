@@ -5,7 +5,7 @@ import 'package:loqma_food_delivery_app/features/auth/domain/entities/user_entit
 part 'login_state.freezed.dart';
 
 @freezed
-class LoginState with _$LoginState {
+sealed class LoginState with _$LoginState {
   const factory LoginState.initial() = LoginInitial;
   const factory LoginState.loading() = LoginLoading;
   const factory LoginState.success(UserEntity user) = LoginSuccess;

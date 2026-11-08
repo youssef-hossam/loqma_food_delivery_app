@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loqma_food_delivery_app/core/di/service_locator.dart';
 import 'package:loqma_food_delivery_app/core/extensions/context_extensions.dart';
 import 'package:loqma_food_delivery_app/core/router/router_transitions.dart';
 import 'package:loqma_food_delivery_app/core/router/routes.dart';
+import 'package:loqma_food_delivery_app/features/auth/presentation/cubits/login/login_cubit.dart';
+import 'package:loqma_food_delivery_app/features/auth/presentation/cubits/register/register_cubit.dart';
 import 'package:loqma_food_delivery_app/features/auth/presentation/pages/login_page.dart';
 import 'package:loqma_food_delivery_app/features/auth/presentation/pages/register_page.dart';
 import 'package:loqma_food_delivery_app/features/onboarding/domain/onboarding_repository.dart';
@@ -25,9 +29,19 @@ class AppRouter {
           OnBoardingPage(onboardingRepository: onboardingRepository),
         );
       case Routes.login:
-        return RouterTransitions.buildFade(const LoginPage());
+        return RouterTransitions.buildFade(
+          BlocProvider(
+            create: (context) => sl<LoginCubit>(),
+            child: const LoginPage(),
+          ),
+        );
       case Routes.register:
-        return RouterTransitions.buildHorizontal(const RegisterPage());
+        return RouterTransitions.buildHorizontal(
+          BlocProvider(
+            create: (context) => sl<RegisterCubit>(),
+            child: const RegisterPage(),
+          ),
+        );
       case Routes.home:
         // TODO: replace with HomeView
         return RouterTransitions.buildHorizontal(
@@ -49,9 +63,7 @@ class _ComingSoon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(title, style: context.text.headlineMedium),
-      ),
+      body: Center(child: Text(title, style: context.text.headlineMedium)),
     );
   }
 }

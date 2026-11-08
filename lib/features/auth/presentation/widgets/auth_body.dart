@@ -10,6 +10,8 @@ class AuthBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      // سحب الشاشة لتحت/فوق يقفل الكيبورد
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       child: Padding(
         padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 24.h),
         child: Column(

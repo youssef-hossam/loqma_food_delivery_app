@@ -137,8 +137,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailHint": MessageLookupByLibrary.simpleMessage("name@example.com"),
         "errorGeneric":
             MessageLookupByLibrary.simpleMessage("حصلت مشكلة، جرّب تاني."),
+        "errorGenericTitle": MessageLookupByLibrary.simpleMessage("حصلت مشكلة"),
+        "errorLoginTitle":
+            MessageLookupByLibrary.simpleMessage("مقدرناش ندخّلك"),
+        "errorNetworkBody": MessageLookupByLibrary.simpleMessage(
+            "اتأكد إن النت شغال وحاول تاني."),
+        "errorNetworkTitle": MessageLookupByLibrary.simpleMessage("مفيش اتصال"),
         "errorNoInternet":
             MessageLookupByLibrary.simpleMessage("مفيش اتصال بالإنترنت"),
+        "errorRateLimitedTitle":
+            MessageLookupByLibrary.simpleMessage("استنى شوية"),
         "errorSessionExpired": MessageLookupByLibrary.simpleMessage(
             "الجلسة خلصت، سجّل دخول تاني."),
         "extraPrice": m9,
@@ -153,6 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fullName": MessageLookupByLibrary.simpleMessage("الاسم بالكامل"),
         "getStarted": MessageLookupByLibrary.simpleMessage("ابدأ دلوقتي"),
         "goToCheckout": MessageLookupByLibrary.simpleMessage("كمّل الطلب"),
+        "gotIt": MessageLookupByLibrary.simpleMessage("تمام"),
         "homeGreeting": m11,
         "itemsCount": m12,
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
@@ -294,6 +303,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "upToCount": m32,
         "validationEmail":
             MessageLookupByLibrary.simpleMessage("اكتب إيميل صحيح"),
+        "validationName": MessageLookupByLibrary.simpleMessage("الاسم لازم يكون حرفين على الأقل"),
+        "validationTerms": MessageLookupByLibrary.simpleMessage("لازم توافق على الشروط عشان تكمل"),
         "validationPasswordWeak": MessageLookupByLibrary.simpleMessage(
             "استخدم 8 حروف أو أكتر فيهم حرف ورقم"),
         "validationPhone":

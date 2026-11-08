@@ -17,6 +17,9 @@ class AuthTextField extends StatefulWidget {
     this.textInputAction = TextInputAction.next,
     this.controller,
     this.onChanged,
+    this.validator,
+    this.onFieldSubmitted,
+    this.scrollPadding = const EdgeInsets.all(20),
   });
 
   final String hint;
@@ -30,12 +33,48 @@ class AuthTextField extends StatefulWidget {
   final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
 
+  /// validation محلية (بتشتغل مع Form.validate()).
+  final FormFieldValidator<String>? validator;
+  final ValueChanged<String>? onFieldSubmitted;
+
+  // المسافة اللي الشاشة بتعمل scroll لها تحت الـ field لما الكيبورد يفتح
+  final EdgeInsets scrollPadding;
+
   @override
   State<AuthTextField> createState() => _AuthTextFieldState();
 }
 
 class _AuthTextFieldState extends State<AuthTextField> {
   bool _hidePassword = true;
+
+  final _fieldKey = GlobalKey<FormFieldState<String>>();
+  final _focusNode = FocusNode();
+
+  // بيبقى true أول ما المستخدم يسيب الـ field مرة
+  bool _touched = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode.addListener(_onFocusChange);
+  }
+
+  void _onFocusChange() {
+    if (!mounted) return;
+    if (!_focusNode.hasFocus) {
+      _touched = true;
+      _fieldKey.currentState?.validate();
+    }
+    setState(() {}); // عشان لون الأيقونة يتغير
+  }
+
+  @override
+  void dispose() {
+    _focusNode
+      ..removeListener(_onFocusChange)
+      ..dispose();
+    super.dispose();
+  }
 
   OutlineInputBorder _border(Color color, double width) {
     return OutlineInputBorder(
@@ -46,63 +85,107 @@ class _AuthTextFieldState extends State<AuthTextField> {
 
   @override
   Widget build(BuildContext context) {
-    final hasError = widget.errorText != null;
+    final iconColor = _focusNode.hasFocus
+        ? context.loqma.primary
+        : context.loqma.textTertiary;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (widget.label != null) ...[
-          Text(widget.label!, style: context.text.labelMedium?.copyWith(color: context.loqma.textPrimary)),
+          Text(
+            widget.label!,
+            style: context.text.labelMedium?.copyWith(
+              color: context.loqma.textPrimary,
+            ),
+          ),
           SizedBox(height: 8.h),
         ],
-        TextField(
+        TextFormField(
+          key: _fieldKey,
           controller: widget.controller,
-          onChanged: widget.onChanged,
+          focusNode: _focusNode,
+          scrollPadding: widget.scrollPadding,
+          validator: widget.validator,
+          forceErrorText: widget.errorText, // خطأ جاي من السيرفر
+          onChanged: (value) {
+            final field = _fieldKey.currentState;
+            if (_touched || (field?.hasError ?? false)) field?.validate();
+            widget.onChanged?.call(value);
+          },
+          onFieldSubmitted: widget.onFieldSubmitted,
           obscureText: widget.isPassword && _hidePassword,
           keyboardType: widget.keyboardType,
           textInputAction: widget.textInputAction,
           style: context.text.bodyLarge?.copyWith(fontSize: 16.sp),
           cursorColor: context.loqma.primary,
+          errorBuilder: (context, errorText) => Padding(
+            padding: EdgeInsets.only(top: 6.h),
+            child: Row(
+              children: [
+                AppIcon('alert', size: 14.r, color: context.loqma.danger),
+                SizedBox(width: 6.w),
+                Expanded(
+                  child: Text(
+                    errorText,
+                    style: context.text.labelSmall?.copyWith(
+                      color: context.loqma.danger,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           decoration: InputDecoration(
             hintText: widget.hint,
-            hintStyle: context.text.bodyLarge?.copyWith(fontSize: 16.sp, color: context.loqma.textTertiary),
+            hintStyle: context.text.bodyLarge?.copyWith(
+              fontSize: 16.sp,
+              color: context.loqma.textTertiary,
+            ),
             filled: true,
             fillColor: context.loqma.card,
-            contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-            prefixIcon: widget.prefix ??
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 16.w,
+              vertical: 16.h,
+            ),
+            prefixIcon:
+                widget.prefix ??
                 (widget.icon == null
                     ? null
                     : Padding(
-                        padding: EdgeInsetsDirectional.only(start: 16.w, end: 12.w),
-                        child: AppIcon(widget.icon!, size: 20.r, color: context.loqma.textTertiary),
+                        padding: EdgeInsetsDirectional.only(
+                          start: 16.w,
+                          end: 12.w,
+                        ),
+                        child: AppIcon(
+                          widget.icon!,
+                          size: 20.r,
+                          color: iconColor,
+                        ),
                       )),
-            prefixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
+            prefixIconConstraints: const BoxConstraints(
+              minWidth: 0,
+              minHeight: 0,
+            ),
             suffixIcon: widget.isPassword
                 ? IconButton(
-                    onPressed: () => setState(() => _hidePassword = !_hidePassword),
+                    onPressed: () =>
+                        setState(() => _hidePassword = !_hidePassword),
                     icon: Icon(
-                      _hidePassword ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                      _hidePassword
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined,
                       size: 20.r,
-                      color: context.loqma.textTertiary,
+                      color: iconColor,
                     ),
                   )
                 : null,
-            enabledBorder: _border(hasError ? context.loqma.danger : context.loqma.borderDefault, hasError ? 2 : 1),
-            focusedBorder: _border(hasError ? context.loqma.danger : context.loqma.primary, 2),
+            enabledBorder: _border(context.loqma.borderDefault, 1),
+            focusedBorder: _border(context.loqma.primary, 2),
+            errorBorder: _border(context.loqma.danger, 2),
+            focusedErrorBorder: _border(context.loqma.danger, 2),
           ),
         ),
-        if (hasError) ...[
-          SizedBox(height: 6.h),
-          Row(
-            children: [
-              AppIcon('alert', size: 14.r, color: context.loqma.danger),
-              SizedBox(width: 6.w),
-              Expanded(
-                child: Text(widget.errorText!, style: context.text.labelSmall?.copyWith(color: context.loqma.danger)),
-              ),
-            ],
-          ),
-        ],
       ],
     );
   }

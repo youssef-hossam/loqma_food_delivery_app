@@ -14,7 +14,11 @@ class AuthBackground extends StatelessWidget {
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: dark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
-      child: Scaffold(
+      // الضغط على أي مكان فاضي يقفل الكيبورد
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        behavior: HitTestBehavior.translucent,
+        child: Scaffold(
         backgroundColor: context.loqma.background,
         body: Stack(
           children: [
@@ -35,6 +39,7 @@ class AuthBackground extends StatelessWidget {
               padding: EdgeInsets.only(top: 45.h),
             ),
           ],
+        ),
         ),
       ),
     );
