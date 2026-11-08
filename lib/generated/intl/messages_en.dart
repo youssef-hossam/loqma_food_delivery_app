@@ -311,14 +311,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "upToCount": m32,
         "validationEmail":
             MessageLookupByLibrary.simpleMessage("Enter a valid email"),
-        "validationName": MessageLookupByLibrary.simpleMessage("Name should be at least 2 characters"),
-        "validationTerms": MessageLookupByLibrary.simpleMessage("Please accept the terms to continue"),
+        "validationName": MessageLookupByLibrary.simpleMessage(
+            "Name should be at least 2 characters"),
         "validationPasswordWeak": MessageLookupByLibrary.simpleMessage(
             "Use 8+ characters with a letter and a number"),
         "validationPhone":
             MessageLookupByLibrary.simpleMessage("Enter a valid phone number"),
         "validationRequired":
             MessageLookupByLibrary.simpleMessage("This field is required"),
+        "validationTerms": MessageLookupByLibrary.simpleMessage(
+            "Please accept the terms to continue"),
         "viewCart": MessageLookupByLibrary.simpleMessage("View cart"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
         "youSaved": m33

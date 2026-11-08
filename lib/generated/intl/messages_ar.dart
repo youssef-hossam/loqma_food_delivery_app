@@ -303,14 +303,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "upToCount": m32,
         "validationEmail":
             MessageLookupByLibrary.simpleMessage("اكتب إيميل صحيح"),
-        "validationName": MessageLookupByLibrary.simpleMessage("الاسم لازم يكون حرفين على الأقل"),
-        "validationTerms": MessageLookupByLibrary.simpleMessage("لازم توافق على الشروط عشان تكمل"),
+        "validationName": MessageLookupByLibrary.simpleMessage(
+            "الاسم لازم يكون حرفين على الأقل"),
         "validationPasswordWeak": MessageLookupByLibrary.simpleMessage(
             "استخدم 8 حروف أو أكتر فيهم حرف ورقم"),
         "validationPhone":
             MessageLookupByLibrary.simpleMessage("اكتب رقم موبايل صحيح"),
         "validationRequired":
             MessageLookupByLibrary.simpleMessage("الخانة دي مطلوبة"),
+        "validationTerms": MessageLookupByLibrary.simpleMessage(
+            "لازم توافق على الشروط عشان تكمل"),
         "viewCart": MessageLookupByLibrary.simpleMessage("عرض السلة"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("أهلاً بيك تاني!"),
         "youSaved": m33
