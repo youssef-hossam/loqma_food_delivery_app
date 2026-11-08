@@ -5,7 +5,7 @@ import 'package:loqma_food_delivery_app/features/auth/domain/entities/user_entit
 part 'register_state.freezed.dart';
 
 @freezed
-class RegisterState with _$RegisterState {
+sealed class RegisterState with _$RegisterState {
   const factory RegisterState.initial() = RegisterInitial;
   const factory RegisterState.loading() = RegisterLoading;
   const factory RegisterState.success(UserEntity user) = RegisterSuccess;

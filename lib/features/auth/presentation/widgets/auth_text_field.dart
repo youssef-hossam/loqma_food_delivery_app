@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loqma_food_delivery_app/core/extensions/context_extensions.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_colors.dart';
 import 'package:loqma_food_delivery_app/core/widgets/app_icon.dart';
+import 'package:loqma_food_delivery_app/core/widgets/field_error_text.dart';
 
 class AuthTextField extends StatefulWidget {
   const AuthTextField({
@@ -20,6 +22,7 @@ class AuthTextField extends StatefulWidget {
     this.validator,
     this.onFieldSubmitted,
     this.scrollPadding = const EdgeInsets.all(20),
+    this.maxLength,
   });
 
   final String hint;
@@ -39,6 +42,7 @@ class AuthTextField extends StatefulWidget {
 
   // المسافة اللي الشاشة بتعمل scroll لها تحت الـ field لما الكيبورد يفتح
   final EdgeInsets scrollPadding;
+  final int? maxLength;
 
   @override
   State<AuthTextField> createState() => _AuthTextFieldState();
@@ -113,29 +117,21 @@ class _AuthTextFieldState extends State<AuthTextField> {
             if (_touched || (field?.hasError ?? false)) field?.validate();
             widget.onChanged?.call(value);
           },
+          maxLength: widget.maxLength,
+          buildCounter: (
+            context, {
+            required currentLength,
+            required isFocused,
+            maxLength,
+          }) => null,
+          maxLengthEnforcement: MaxLengthEnforcement.enforced,
           onFieldSubmitted: widget.onFieldSubmitted,
           obscureText: widget.isPassword && _hidePassword,
           keyboardType: widget.keyboardType,
           textInputAction: widget.textInputAction,
           style: context.text.bodyLarge?.copyWith(fontSize: 16.sp),
           cursorColor: context.loqma.primary,
-          errorBuilder: (context, errorText) => Padding(
-            padding: EdgeInsets.only(top: 6.h),
-            child: Row(
-              children: [
-                AppIcon('alert', size: 14.r, color: context.loqma.danger),
-                SizedBox(width: 6.w),
-                Expanded(
-                  child: Text(
-                    errorText,
-                    style: context.text.labelSmall?.copyWith(
-                      color: context.loqma.danger,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          errorBuilder: (context, errorText) => FieldErrorText(errorText),
           decoration: InputDecoration(
             hintText: widget.hint,
             hintStyle: context.text.bodyLarge?.copyWith(
