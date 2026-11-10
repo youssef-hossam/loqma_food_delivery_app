@@ -1,18 +1,10 @@
-import 'dart:developer';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:loqma_food_delivery_app/app.dart';
 import 'package:loqma_food_delivery_app/core/di/service_locator.dart';
-import 'package:loqma_food_delivery_app/core/error/error_handler.dart';
-import 'package:loqma_food_delivery_app/core/error/failure.dart';
 import 'package:loqma_food_delivery_app/core/localization/locale_controller.dart';
 import 'package:loqma_food_delivery_app/core/router/app_router.dart';
 import 'package:loqma_food_delivery_app/core/utils/cache/cache_helper.dart';
-import 'package:loqma_food_delivery_app/features/auth/data/datasource/auth_api_service.dart';
-import 'package:loqma_food_delivery_app/features/auth/data/models/login_request_body.dart';
-import 'package:loqma_food_delivery_app/features/auth/domain/usecases/login_usecase.dart';
 import 'package:loqma_food_delivery_app/features/onboarding/data/onboarding_repository_impl.dart';
 
 Future<void> main() async {

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:loqma_food_delivery_app/core/network/interceptors/auth_interceptor.dart';
 import 'package:loqma_food_delivery_app/core/network/interceptors/language_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -20,6 +21,7 @@ class DioFactory {
     _dio.interceptors.add(LanguageInterceptor());
     // TODO: interceptor الـ Authorization (والـ refresh token) هيتضاف هنا
 
+    _dio.interceptors.add(AuthInterceptor());
     _dio.interceptors.add(
       PrettyDioLogger(
         requestHeader: true,
