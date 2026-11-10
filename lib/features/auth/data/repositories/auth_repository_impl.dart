@@ -61,6 +61,13 @@ class AuthRepositoryImpl extends AuthRepository {
     }
   }
 
+  // The refresh token is what keeps the session alive (the access token can be refreshed)
+  @override
+  Future<bool> isLoggedIn() async {
+    final refreshToken = await localDataSource.getRefreshToken();
+    return refreshToken != null;
+  }
+
   // الباك إند عايز الرقم بكود الدولة: 01140710570 → +201140710570
   String? _toInternationalPhone(String? phone) {
     if (phone == null || phone.isEmpty) return null;

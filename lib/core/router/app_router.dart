@@ -4,6 +4,7 @@ import 'package:loqma_food_delivery_app/core/di/service_locator.dart';
 import 'package:loqma_food_delivery_app/core/extensions/context_extensions.dart';
 import 'package:loqma_food_delivery_app/core/router/router_transitions.dart';
 import 'package:loqma_food_delivery_app/core/router/routes.dart';
+import 'package:loqma_food_delivery_app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:loqma_food_delivery_app/features/auth/presentation/cubits/login/login_cubit.dart';
 import 'package:loqma_food_delivery_app/features/auth/presentation/cubits/register/register_cubit.dart';
 import 'package:loqma_food_delivery_app/features/auth/presentation/pages/login_page.dart';
@@ -15,13 +16,19 @@ import 'package:loqma_food_delivery_app/features/splash/presentation/pages/splas
 class AppRouter {
   AppRouter({required this.onboardingRepository});
 
+  // Lets us navigate from places that have no BuildContext (like the AuthInterceptor)
+  static final navigatorKey = GlobalKey<NavigatorState>();
+
   final OnboardingRepository onboardingRepository;
 
   Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.splash:
         return RouterTransitions.build(
-          SplashPage(onboardingRepository: onboardingRepository),
+          SplashPage(
+            onboardingRepository: onboardingRepository,
+            authRepository: sl<AuthRepository>(),
+          ),
           settings: settings,
         );
       case Routes.onboarding:

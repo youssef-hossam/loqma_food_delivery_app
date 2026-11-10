@@ -4,6 +4,11 @@ import 'package:loqma_food_delivery_app/core/constants/cache_constants.dart';
 import 'package:loqma_food_delivery_app/core/utils/cache/cache_helper.dart';
 
 class AuthInterceptor extends QueuedInterceptor {
+  AuthInterceptor({this.onSessionExpired});
+
+  // Called when the session can't be recovered (e.g. go back to the login screen)
+  final void Function()? onSessionExpired;
+
   // A separate Dio with no interceptors, used for the refresh call and the retry.
   // Using the main Dio here would block: this interceptor is a queue, so the
   // refresh request would wait behind the request that is waiting for it.
@@ -65,7 +70,7 @@ class AuthInterceptor extends QueuedInterceptor {
       key: CacheConstants.refreshToken,
     );
     if (refreshToken == null) {
-      await _clearTokens();
+      await _endSession();
       return handler.next(err);
     }
 
@@ -91,7 +96,7 @@ class AuthInterceptor extends QueuedInterceptor {
       // Server rejected the refresh token (INVALID_REFRESH_TOKEN / REFRESH_TOKEN_REUSED)
       // -> the session is over, clear tokens.
       // Other errors (no internet, timeout) -> keep the tokens, the user stays logged in.
-      if (e.response?.statusCode == 401) await _clearTokens();
+      if (e.response?.statusCode == 401) await _endSession();
       return handler.next(err);
     }
 
@@ -116,9 +121,10 @@ class AuthInterceptor extends QueuedInterceptor {
     }
   }
 
-  // Removes both tokens (used when the session can't be recovered)
-  Future<void> _clearTokens() async {
+  // The session can't be recovered -> remove both tokens and tell the app
+  Future<void> _endSession() async {
     await CacheHelper.deleteSecureData(key: CacheConstants.accessToken);
     await CacheHelper.deleteSecureData(key: CacheConstants.refreshToken);
+    onSessionExpired?.call();
   }
 }

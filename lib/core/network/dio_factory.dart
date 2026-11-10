@@ -10,7 +10,7 @@ class DioFactory {
   final Dio _dio;
   Dio get dio => _dio;
 
-  DioFactory() : _dio = Dio() {
+  DioFactory({void Function()? onSessionExpired}) : _dio = Dio() {
     _dio.options
       ..connectTimeout = const Duration(seconds: 20)
       ..receiveTimeout = const Duration(seconds: 20)
@@ -19,9 +19,7 @@ class DioFactory {
     // الترتيب مهم: الـ interceptors اللي بتزود headers الأول، والـ logger في الآخر
     // عشان يطبع الـ request بعد ما الـ headers اتحطت.
     _dio.interceptors.add(LanguageInterceptor());
-    // TODO: interceptor الـ Authorization (والـ refresh token) هيتضاف هنا
-
-    _dio.interceptors.add(AuthInterceptor());
+    _dio.interceptors.add(AuthInterceptor(onSessionExpired: onSessionExpired));
     _dio.interceptors.add(
       PrettyDioLogger(
         requestHeader: true,

@@ -28,6 +28,7 @@ class LoqmaApp extends StatelessWidget {
           builder: (context, locale, _) {
             final arabic = localeController.isArabic;
             return MaterialApp(
+              navigatorKey: AppRouter.navigatorKey,
               onGenerateTitle: (context) => context.s.appName,
               debugShowCheckedModeBanner: false,
               locale: locale,

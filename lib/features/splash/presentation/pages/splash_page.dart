@@ -4,13 +4,19 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:loqma_food_delivery_app/core/router/routes.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_colors.dart';
 import 'package:loqma_food_delivery_app/core/widgets/loqma_logo.dart';
+import 'package:loqma_food_delivery_app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:loqma_food_delivery_app/features/onboarding/domain/onboarding_repository.dart';
 import 'package:loqma_food_delivery_app/features/splash/presentation/widgets/ring.dart';
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({super.key, required this.onboardingRepository});
+  const SplashPage({
+    super.key,
+    required this.onboardingRepository,
+    required this.authRepository,
+  });
 
   final OnboardingRepository onboardingRepository;
+  final AuthRepository authRepository;
 
   @override
   State<SplashPage> createState() => _SplashPageState();
@@ -37,13 +43,23 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
 
   Future<void> _start() async {
     final completedFuture = widget.onboardingRepository.isCompleted();
+    final loggedInFuture = widget.authRepository.isLoggedIn();
     await Future<void>.delayed(const Duration(milliseconds: 250));
     if (!mounted) return;
     await _c.forward();
     final completed = await completedFuture;
+    final loggedIn = await loggedInFuture;
     await Future<void>.delayed(const Duration(milliseconds: 700));
     if (!mounted) return;
-    Navigator.pushReplacementNamed(context, completed ? Routes.login : Routes.onboarding);
+
+    // First time -> onboarding, logged in -> home, otherwise -> login
+    String next = Routes.login;
+    if (!completed) {
+      next = Routes.onboarding;
+    } else if (loggedIn) {
+      next = Routes.home;
+    }
+    Navigator.pushReplacementNamed(context, next);
   }
 
   @override

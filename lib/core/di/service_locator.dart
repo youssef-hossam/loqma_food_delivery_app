@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:loqma_food_delivery_app/core/network/dio_factory.dart';
+import 'package:loqma_food_delivery_app/core/router/app_router.dart';
+import 'package:loqma_food_delivery_app/core/router/routes.dart';
 import 'package:loqma_food_delivery_app/features/auth/data/datasource/auth_api_service.dart';
 import 'package:loqma_food_delivery_app/features/auth/data/datasource/auth_local_data_source.dart';
 import 'package:loqma_food_delivery_app/features/auth/data/datasource/auth_remote_data_source.dart';
@@ -24,7 +26,9 @@ void setupServiceLocator() {
 //! ───────────────────────── Core ─────────────────────────
 void _initCore() {
   // Dio واحد للتطبيق كله (عليه الـ logger وبعدين الـ interceptors)
-  sl.registerLazySingleton<Dio>(() => DioFactory().dio);
+  sl.registerLazySingleton<Dio>(
+    () => DioFactory(onSessionExpired: _goToLogin).dio,
+  );
 }
 
 //! ───────────────────────── Auth ─────────────────────────
@@ -52,4 +56,12 @@ void _initAuth() {
   // every once we open the screen, we want a new instance of the cubit, so we use registerFactory
   sl.registerFactory(() => LoginCubit(loginUseCase: sl()));
   sl.registerFactory(() => RegisterCubit(registerUseCase: sl()));
+}
+
+// Session expired -> clear the whole stack and open the login screen
+void _goToLogin() {
+  AppRouter.navigatorKey.currentState?.pushNamedAndRemoveUntil(
+    Routes.login,
+    (_) => false,
+  );
 }

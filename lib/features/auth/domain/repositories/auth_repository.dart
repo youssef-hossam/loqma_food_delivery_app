@@ -15,4 +15,6 @@ abstract class AuthRepository {
     required String password,
     String? phone,
   });
+
+  Future<bool> isLoggedIn();
 }
