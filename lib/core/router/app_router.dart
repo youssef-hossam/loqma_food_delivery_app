@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loqma_food_delivery_app/core/di/service_locator.dart';
-import 'package:loqma_food_delivery_app/core/extensions/context_extensions.dart';
 import 'package:loqma_food_delivery_app/core/router/router_transitions.dart';
 import 'package:loqma_food_delivery_app/core/router/routes.dart';
 import 'package:loqma_food_delivery_app/features/auth/domain/repositories/auth_repository.dart';
@@ -9,6 +8,7 @@ import 'package:loqma_food_delivery_app/features/auth/presentation/cubits/login/
 import 'package:loqma_food_delivery_app/features/auth/presentation/cubits/register/register_cubit.dart';
 import 'package:loqma_food_delivery_app/features/auth/presentation/pages/login_page.dart';
 import 'package:loqma_food_delivery_app/features/auth/presentation/pages/register_page.dart';
+import 'package:loqma_food_delivery_app/features/home/presentation/pages/main_shell_page.dart';
 import 'package:loqma_food_delivery_app/features/onboarding/domain/onboarding_repository.dart';
 import 'package:loqma_food_delivery_app/features/onboarding/presentation/pages/on_boarding_page.dart';
 import 'package:loqma_food_delivery_app/features/splash/presentation/pages/splash_page.dart';
@@ -50,27 +50,11 @@ class AppRouter {
           ),
         );
       case Routes.home:
-        // TODO: replace with HomeView
-        return RouterTransitions.buildHorizontal(
-          const _ComingSoon(title: 'Home'),
-        );
+        return RouterTransitions.buildFade(const MainShellPage());
       default:
         return RouterTransitions.build(
           const Scaffold(body: Center(child: Text("No Route"))),
         );
     }
-  }
-}
-
-class _ComingSoon extends StatelessWidget {
-  const _ComingSoon({required this.title});
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: Text(title, style: context.text.headlineMedium)),
-    );
   }
 }
