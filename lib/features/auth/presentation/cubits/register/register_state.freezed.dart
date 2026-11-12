@@ -88,10 +88,7 @@ case RegisterInitial():
 return initial(_that);case RegisterLoading():
 return loading(_that);case RegisterSuccess():
 return success(_that);case RegisterFailure():
-return failure(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return failure(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -159,10 +156,7 @@ case RegisterInitial():
 return initial();case RegisterLoading():
 return loading();case RegisterSuccess():
 return success(_that.user);case RegisterFailure():
-return failure(_that.failure);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return failure(_that.failure);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
