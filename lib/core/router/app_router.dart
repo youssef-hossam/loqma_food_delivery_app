@@ -53,7 +53,7 @@ class AppRouter {
         return RouterTransitions.buildFade(const MainShellPage());
       default:
         return RouterTransitions.build(
-          const Scaffold(body: Center(child: Text("No Route"))),
+          const Scaffold(body: Center(child: Text('No Route'))),
         );
     }
   }

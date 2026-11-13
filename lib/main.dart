@@ -73,6 +73,12 @@ Future<void> main() async {
   await CacheHelper.init();
   setupServiceLocator();
 
+  // final res = await sl<HomeApiService>().getHome();
+  // print('banners: ${res.data.banners.length}');
+  // print('featured: ${res.data.featured.first.name}');
+  // print(
+  //   'dish: ${res.data.popularDishes.first.name} - ${res.data.popularDishes.first.restaurant?.name}',
+  // );
   runApp(
     LoqmaApp(
       appRouter: AppRouter(
