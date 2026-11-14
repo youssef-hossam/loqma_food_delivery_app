@@ -14,6 +14,10 @@ import 'package:loqma_food_delivery_app/features/auth/domain/usecases/register_u
 import 'package:loqma_food_delivery_app/features/auth/presentation/cubits/login/login_cubit.dart';
 import 'package:loqma_food_delivery_app/features/auth/presentation/cubits/register/register_cubit.dart';
 import 'package:loqma_food_delivery_app/features/home/data/datasources/home_remote_data_source.dart';
+import 'package:loqma_food_delivery_app/features/home/data/repositories/home_repository_impl.dart';
+import 'package:loqma_food_delivery_app/features/home/domain/repositories/home_repository.dart';
+import 'package:loqma_food_delivery_app/features/home/domain/usecases/get_home_usecase.dart';
+import 'package:loqma_food_delivery_app/features/home/presentation/cubit/home_cubit.dart';
 
 /// الـ service locator بتاع التطبيق كله.
 /// أي حتة محتاجة dependency بتطلبها كده: sl<AuthRemoteDataSource>()
@@ -67,6 +71,11 @@ void _initHome() {
   sl.registerLazySingleton<HomeRemoteDataSource>(
     () => HomeRemoteDataSource(apiService: sl<HomeApiService>()),
   );
+  sl.registerLazySingleton<HomeRepository>(
+    () => HomeRepositoryImpl(remoteDataSource: sl()),
+  );
+  sl.registerLazySingleton(() => GetHomeUseCase(repository: sl()));
+  sl.registerFactory(() => HomeCubit(getHomeUseCase: sl()));
 }
 
 // Session expired -> clear the whole stack and open the login screen

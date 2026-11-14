@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loqma_food_delivery_app/core/di/service_locator.dart';
 import 'package:loqma_food_delivery_app/core/extensions/context_extensions.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_colors.dart';
 import 'package:loqma_food_delivery_app/core/widgets/loqma_bottom_nav.dart';
+import 'package:loqma_food_delivery_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:loqma_food_delivery_app/features/home/presentation/pages/home_page.dart';
 
 // The screen after login: holds the 4 tabs and the bottom nav bar
@@ -33,7 +36,10 @@ class _MainShellPageState extends State<MainShellPage> {
       body: IndexedStack(
         index: _currentIndex,
         children: [
-          const HomePage(),
+          BlocProvider(
+            create: (context) => sl<HomeCubit>()..getHome(),
+            child: const HomePage(),
+          ),
           _TabPlaceholder(title: context.s.navSearch),
           _TabPlaceholder(title: context.s.navOrders),
           _TabPlaceholder(title: context.s.navProfile),
