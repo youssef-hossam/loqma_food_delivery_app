@@ -248,6 +248,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "popular": MessageLookupByLibrary.simpleMessage("Popular"),
         "popularCuisines":
             MessageLookupByLibrary.simpleMessage("Popular cuisines"),
+        "topRated": MessageLookupByLibrary.simpleMessage("Top rated"),
         "popularNearYou":
             MessageLookupByLibrary.simpleMessage("Popular near you"),
         "price": m21,

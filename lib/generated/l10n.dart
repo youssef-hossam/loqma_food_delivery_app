@@ -950,6 +950,16 @@ class S {
     );
   }
 
+  /// `Top rated`
+  String get topRated {
+    return Intl.message(
+      'Top rated',
+      name: 'topRated',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Home`
   String get navHome {
     return Intl.message(
