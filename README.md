@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img src="screenshots/showcase.webp" alt="Loqma screens" width="100%"/>
+  <img src="mockups/hero.webp" alt="Loqma" width="100%"/>
 </p>
 
 ## ✨ Features
@@ -30,10 +30,25 @@
 - ⚠️ **Error handling**: typed failures (`Either<Failure, T>`) with friendly dialogs, e.g. *No connection → Try again*.
 
 <p align="center">
-  <img src="screenshots/arabic.webp" alt="Arabic RTL screens" width="80%"/>
+  <img src="mockups/arabic.webp" alt="Arabic RTL screens" width="100%"/>
 </p>
 
-## 📱 Screens
+## 🎨 Design
+
+Every screen was designed first in **Figma** on a token-based design system (light & dark color modes, spacing, radius, typography), then built in Flutter.
+
+<p align="center"><img src="mockups/journey.webp" alt="Order journey" width="100%"/></p>
+<p align="center"><img src="mockups/features.webp" alt="Checkout, tracking, orders, profile" width="100%"/></p>
+<p align="center"><img src="mockups/dark.webp" alt="Dark mode" width="100%"/></p>
+<p align="center"><img src="mockups/all_screens.webp" alt="All screens" width="100%"/></p>
+
+## 📱 Running app
+
+Real screenshots from the Flutter app running against the backend:
+
+<p align="center">
+  <img src="screenshots/showcase.webp" alt="Loqma running app" width="100%"/>
+</p>
 
 | Onboarding | Login | Home | Restaurant |
 |:-:|:-:|:-:|:-:|
