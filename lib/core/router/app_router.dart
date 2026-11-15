@@ -10,6 +10,10 @@ import 'package:loqma_food_delivery_app/features/auth/presentation/pages/login_p
 import 'package:loqma_food_delivery_app/features/auth/presentation/pages/register_page.dart';
 import 'package:loqma_food_delivery_app/features/home/presentation/pages/main_shell_page.dart';
 import 'package:loqma_food_delivery_app/features/onboarding/domain/onboarding_repository.dart';
+import 'package:loqma_food_delivery_app/features/restaurants/presentation/cubit/dish_details_cubit.dart';
+import 'package:loqma_food_delivery_app/features/restaurants/presentation/cubit/restaurant_details_cubit.dart';
+import 'package:loqma_food_delivery_app/features/restaurants/presentation/pages/dish_details_page.dart';
+import 'package:loqma_food_delivery_app/features/restaurants/presentation/pages/restaurant_details_page.dart';
 import 'package:loqma_food_delivery_app/features/onboarding/presentation/pages/on_boarding_page.dart';
 import 'package:loqma_food_delivery_app/features/splash/presentation/pages/splash_page.dart';
 
@@ -51,6 +55,25 @@ class AppRouter {
         );
       case Routes.home:
         return RouterTransitions.buildFade(const MainShellPage());
+      case Routes.restaurantDetails:
+        // The restaurant id comes from the card that was tapped
+        final restaurantId = settings.arguments as String;
+        return RouterTransitions.buildHorizontal(
+          BlocProvider(
+            create: (context) =>
+                sl<RestaurantDetailsCubit>()..getDetails(restaurantId),
+            child: RestaurantDetailsPage(restaurantId: restaurantId),
+          ),
+        );
+      case Routes.dishDetails:
+        final dishId = settings.arguments as String;
+        // Opens from the bottom like a sheet
+        return RouterTransitions.buildVertical(
+          BlocProvider(
+            create: (context) => sl<DishDetailsCubit>()..getDish(dishId),
+            child: DishDetailsPage(dishId: dishId),
+          ),
+        );
       default:
         return RouterTransitions.build(
           const Scaffold(body: Center(child: Text('No Route'))),

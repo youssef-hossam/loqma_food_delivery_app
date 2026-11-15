@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loqma_food_delivery_app/core/extensions/context_extensions.dart';
+import 'package:loqma_food_delivery_app/core/router/routes.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_colors.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_spacing.dart';
 import 'package:loqma_food_delivery_app/core/widgets/app_error_view.dart';
@@ -184,8 +185,15 @@ class _DetailsContentState extends State<_DetailsContent> {
                   ),
                   child: Text(menu[i].name, style: context.text.titleLarge),
                 ),
-                // TODO: open the dish details page
-                for (final dish in menu[i].items) MenuDishTile(dish: dish),
+                for (final dish in menu[i].items)
+                  MenuDishTile(
+                    dish: dish,
+                    onTap: () => Navigator.pushNamed(
+                      context,
+                      Routes.dishDetails,
+                      arguments: dish.id,
+                    ),
+                  ),
               ],
             ),
           ),

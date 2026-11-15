@@ -2,10 +2,12 @@ import 'package:dartz/dartz.dart';
 import 'package:loqma_food_delivery_app/core/error/error_handler.dart';
 import 'package:loqma_food_delivery_app/core/error/failure.dart';
 import 'package:loqma_food_delivery_app/features/restaurants/data/datasources/restaurant_remote_data_source.dart';
+import 'package:loqma_food_delivery_app/features/restaurants/data/mappers/dish_details_mapper.dart';
 import 'package:loqma_food_delivery_app/features/restaurants/data/mappers/menu_section_mapper.dart';
 import 'package:loqma_food_delivery_app/features/restaurants/data/mappers/restaurant_model_mapper.dart';
 import 'package:loqma_food_delivery_app/features/restaurants/data/models/menu_section_model.dart';
 import 'package:loqma_food_delivery_app/features/restaurants/data/models/restaurant_model.dart';
+import 'package:loqma_food_delivery_app/features/restaurants/domain/entities/dish_details_entity.dart';
 import 'package:loqma_food_delivery_app/features/restaurants/domain/entities/restaurant_details_entity.dart';
 import 'package:loqma_food_delivery_app/features/restaurants/domain/repositories/restaurants_repository.dart';
 
@@ -34,6 +36,16 @@ class RestaurantsRepositoryImpl implements RestaurantsRepository {
           menu: menu.map((s) => s.toEntity()).toList(),
         ),
       );
+    } catch (error) {
+      return Left(ErrorHandler.handle(error));
+    }
+  }
+
+  @override
+  Future<Either<Failure, DishDetailsEntity>> getDishDetails(String id) async {
+    try {
+      final dish = await remoteDataSource.getDishDetails(id);
+      return Right(dish.toEntity());
     } catch (error) {
       return Left(ErrorHandler.handle(error));
     }

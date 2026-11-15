@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loqma_food_delivery_app/core/extensions/context_extensions.dart';
+import 'package:loqma_food_delivery_app/core/router/routes.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_colors.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_spacing.dart';
 import 'package:loqma_food_delivery_app/core/widgets/loqma_button.dart';
@@ -12,6 +13,7 @@ import 'package:loqma_food_delivery_app/features/home/presentation/widgets/banne
 import 'package:loqma_food_delivery_app/features/home/presentation/widgets/categories_list.dart';
 import 'package:loqma_food_delivery_app/features/home/presentation/widgets/home_header.dart';
 import 'package:loqma_food_delivery_app/features/home/presentation/widgets/home_search_bar.dart';
+import 'package:loqma_food_delivery_app/features/home/presentation/widgets/home_skeleton.dart';
 import 'package:loqma_food_delivery_app/features/home/presentation/widgets/section_header.dart';
 import 'package:loqma_food_delivery_app/features/restaurants/presentation/widgets/dish_card.dart';
 import 'package:loqma_food_delivery_app/features/restaurants/presentation/widgets/restaurant_card.dart';
@@ -25,16 +27,18 @@ class HomePage extends StatelessWidget {
       bottom: false,
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
-          // sealed class: the compiler makes sure we handle every state
-          return switch (state) {
-            HomeInitial() || HomeLoading() => const Center(
-              child: CircularProgressIndicator(),
-            ),
-            HomeFailure() => _HomeError(
-              onRetry: () => context.read<HomeCubit>().getHome(),
-            ),
-            HomeSuccess(:final home) => _HomeContent(home: home),
-          };
+          // AnimatedSwitcher fades between skeleton, error and content
+          return AnimatedSwitcher(
+            duration: const Duration(milliseconds: 350),
+            // sealed class: the compiler makes sure we handle every state
+            child: switch (state) {
+              HomeInitial() || HomeLoading() => const HomeSkeleton(),
+              HomeFailure() => _HomeError(
+                onRetry: () => context.read<HomeCubit>().getHome(),
+              ),
+              HomeSuccess(:final home) => _HomeContent(home: home),
+            },
+          );
         },
       ),
     );
@@ -52,6 +56,8 @@ class _HomeContent extends StatelessWidget {
       // Pull down to reload the home data
       onRefresh: () => context.read<HomeCubit>().getHome(),
       child: CustomScrollView(
+        // Lets pull to refresh work even when the content is short
+        physics: const AlwaysScrollableScrollPhysics(),
         slivers: [
           const SliverToBoxAdapter(child: HomeHeader()),
           // TODO: open the search tab
@@ -79,11 +85,15 @@ class _HomeContent extends StatelessWidget {
             ),
             SliverToBoxAdapter(
               child: _HorizontalList(
-                height: 215.h,
                 itemCount: home.featured.length,
                 itemBuilder: (index) => RestaurantCard(
                   restaurant: home.featured[index],
                   width: 260.w,
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    Routes.restaurantDetails,
+                    arguments: home.featured[index].id,
+                  ),
                 ),
               ),
             ),
@@ -95,11 +105,15 @@ class _HomeContent extends StatelessWidget {
             ),
             SliverToBoxAdapter(
               child: _HorizontalList(
-                height: 215.h,
                 itemCount: home.topRated.length,
                 itemBuilder: (index) => RestaurantCard(
                   restaurant: home.topRated[index],
                   width: 260.w,
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    Routes.restaurantDetails,
+                    arguments: home.topRated[index].id,
+                  ),
                 ),
               ),
             ),
@@ -111,10 +125,15 @@ class _HomeContent extends StatelessWidget {
             ),
             SliverToBoxAdapter(
               child: _HorizontalList(
-                height: 200.h,
                 itemCount: home.popularDishes.length,
-                itemBuilder: (index) =>
-                    DishCard(dish: home.popularDishes[index]),
+                itemBuilder: (index) => DishCard(
+                  dish: home.popularDishes[index],
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    Routes.dishDetails,
+                    arguments: home.popularDishes[index].id,
+                  ),
+                ),
               ),
             ),
           ],
@@ -127,32 +146,28 @@ class _HomeContent extends StatelessWidget {
   }
 }
 
-// Horizontal list with the same padding and spacing for every section
+// Horizontal list with the same padding and spacing for every section.
+// The home lists are short (max ~10 items), so a Row is fine and
+// the list height comes from the cards instead of a fixed number.
 class _HorizontalList extends StatelessWidget {
-  const _HorizontalList({
-    required this.height,
-    required this.itemCount,
-    required this.itemBuilder,
-  });
+  const _HorizontalList({required this.itemCount, required this.itemBuilder});
 
-  final double height;
   final int itemCount;
   final Widget Function(int index) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: height,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        // Vertical padding so the card shadows don't get cut
-        padding: EdgeInsets.symmetric(
-          horizontal: AppSpacing.s20.w,
-          vertical: AppSpacing.s4.h,
-        ),
-        itemCount: itemCount,
-        separatorBuilder: (_, _) => SizedBox(width: AppSpacing.s16.w),
-        itemBuilder: (_, index) => itemBuilder(index),
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      // Vertical padding so the card shadows don't get cut
+      padding: EdgeInsets.symmetric(
+        horizontal: AppSpacing.s20.w,
+        vertical: AppSpacing.s4.h,
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: AppSpacing.s16.w,
+        children: List.generate(itemCount, itemBuilder),
       ),
     );
   }

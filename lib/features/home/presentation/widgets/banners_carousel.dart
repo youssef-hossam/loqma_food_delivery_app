@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loqma_food_delivery_app/core/extensions/context_extensions.dart';
@@ -18,12 +20,41 @@ class BannersCarousel extends StatefulWidget {
 
 class _BannersCarouselState extends State<BannersCarousel> {
   // viewportFraction < 1 shows a small part of the next banner
-  final _controller = PageController(viewportFraction: 0.9);
+  late PageController _controller;
   int _currentPage = 0;
+  Timer? _timer;
+  void _startAutoScroll() {
+    _timer?.cancel();
+
+    _timer = Timer.periodic(const Duration(seconds: 3), (_) {
+      if (!_controller.hasClients) return;
+
+      _currentPage++;
+
+      if (_currentPage >= widget.banners.length) {
+        _currentPage = 0;
+      }
+
+      _controller.animateToPage(
+        _currentPage,
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
+
+  @override
+  void initState() {
+    _controller = PageController(viewportFraction: 0.9);
+    _startAutoScroll();
+    super.initState();
+  }
 
   @override
   void dispose() {
+    _timer?.cancel();
     _controller.dispose();
+
     super.dispose();
   }
 
@@ -37,6 +68,11 @@ class _BannersCarouselState extends State<BannersCarousel> {
             // Height follows the width so the banner keeps the same shape on every phone
             height: 160.w,
             child: PageView.builder(
+              scrollBehavior: const ScrollBehavior().copyWith(
+                overscroll: false,
+              ),
+              allowImplicitScrolling: true,
+
               controller: _controller,
               itemCount: widget.banners.length,
               onPageChanged: (index) => setState(() => _currentPage = index),
