@@ -15,15 +15,14 @@ class CategoriesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 100.h,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: AppSpacing.s20.w),
-        itemCount: categories.length,
-        separatorBuilder: (_, _) => SizedBox(width: AppSpacing.s16.w),
-        itemBuilder: (context, index) {
-          final category = categories[index];
+    // Few items, so a Row is fine and its height comes from the content
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      padding: EdgeInsets.symmetric(horizontal: AppSpacing.s20.w),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: AppSpacing.s16.w,
+        children: categories.map((category) {
           // TODO: open the restaurants list filtered by this category
           return SizedBox(
             width: 68.w,
@@ -52,7 +51,7 @@ class CategoriesList extends StatelessWidget {
               ],
             ),
           );
-        },
+        }).toList(),
       ),
     );
   }

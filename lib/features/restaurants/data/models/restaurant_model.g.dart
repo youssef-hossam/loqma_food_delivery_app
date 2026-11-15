@@ -29,6 +29,8 @@ _RestaurantModel _$RestaurantModelFromJson(Map<String, dynamic> json) =>
       categories: (json['categories'] as List<dynamic>)
           .map((e) => IdNameModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      description: json['description'] as String?,
+      address: json['address'] as String?,
     );
 
 Map<String, dynamic> _$RestaurantModelToJson(_RestaurantModel instance) =>
@@ -50,4 +52,6 @@ Map<String, dynamic> _$RestaurantModelToJson(_RestaurantModel instance) =>
       'distanceKm': instance.distanceKm,
       'isFavorite': instance.isFavorite,
       'categories': instance.categories,
+      'description': instance.description,
+      'address': instance.address,
     };

@@ -248,7 +248,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "popular": MessageLookupByLibrary.simpleMessage("Popular"),
         "popularCuisines":
             MessageLookupByLibrary.simpleMessage("Popular cuisines"),
-        "topRated": MessageLookupByLibrary.simpleMessage("Top rated"),
         "popularNearYou":
             MessageLookupByLibrary.simpleMessage("Popular near you"),
         "price": m21,
@@ -304,6 +303,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeSystem": MessageLookupByLibrary.simpleMessage("System"),
         "toggleOff": MessageLookupByLibrary.simpleMessage("Off"),
         "toggleOn": MessageLookupByLibrary.simpleMessage("On"),
+        "topRated": MessageLookupByLibrary.simpleMessage("Top rated"),
         "total": MessageLookupByLibrary.simpleMessage("Total"),
         "totalInclDelivery":
             MessageLookupByLibrary.simpleMessage("Total (incl. delivery)"),

@@ -34,7 +34,8 @@ class _BannersCarouselState extends State<BannersCarousel> {
       child: Column(
         children: [
           SizedBox(
-            height: 160.h,
+            // Height follows the width so the banner keeps the same shape on every phone
+            height: 160.w,
             child: PageView.builder(
               controller: _controller,
               itemCount: widget.banners.length,
@@ -55,7 +56,7 @@ class _BannersCarouselState extends State<BannersCarousel> {
                 duration: const Duration(milliseconds: 250),
                 margin: EdgeInsets.symmetric(horizontal: 3.w),
                 width: isActive ? 20.w : 6.w,
-                height: 6.h,
+                height: 6.w,
                 decoration: BoxDecoration(
                   color: isActive
                       ? context.loqma.primary
@@ -100,21 +101,24 @@ class _BannerCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(AppSpacing.s20.r),
+            padding: EdgeInsets.all(AppSpacing.s16.r),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  banner.title,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: context.text.titleLarge?.copyWith(color: white),
+                // Flexible lets a long title shrink instead of overflowing
+                Flexible(
+                  child: Text(
+                    banner.title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: context.text.titleLarge?.copyWith(color: white),
+                  ),
                 ),
                 SizedBox(height: AppSpacing.s4.h),
                 Text(
                   banner.subtitle,
-                  maxLines: 2,
+                  maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: context.text.bodyMedium?.copyWith(color: white),
                 ),

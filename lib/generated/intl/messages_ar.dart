@@ -241,7 +241,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "popular": MessageLookupByLibrary.simpleMessage("الأشهر"),
         "popularCuisines":
             MessageLookupByLibrary.simpleMessage("المطابخ الأشهر"),
-        "topRated": MessageLookupByLibrary.simpleMessage("الأعلى تقييمًا"),
         "popularNearYou": MessageLookupByLibrary.simpleMessage("الأشهر حواليك"),
         "price": m21,
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
@@ -295,6 +294,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeSystem": MessageLookupByLibrary.simpleMessage("حسب الجهاز"),
         "toggleOff": MessageLookupByLibrary.simpleMessage("مقفول"),
         "toggleOn": MessageLookupByLibrary.simpleMessage("شغّال"),
+        "topRated": MessageLookupByLibrary.simpleMessage("الأعلى تقييمًا"),
         "total": MessageLookupByLibrary.simpleMessage("الإجمالي"),
         "totalInclDelivery":
             MessageLookupByLibrary.simpleMessage("الإجمالي (شامل التوصيل)"),

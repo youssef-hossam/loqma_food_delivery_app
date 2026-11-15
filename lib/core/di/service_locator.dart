@@ -18,6 +18,12 @@ import 'package:loqma_food_delivery_app/features/home/data/repositories/home_rep
 import 'package:loqma_food_delivery_app/features/home/domain/repositories/home_repository.dart';
 import 'package:loqma_food_delivery_app/features/home/domain/usecases/get_home_usecase.dart';
 import 'package:loqma_food_delivery_app/features/home/presentation/cubit/home_cubit.dart';
+import 'package:loqma_food_delivery_app/features/restaurants/data/datasources/restaurant_api_service.dart';
+import 'package:loqma_food_delivery_app/features/restaurants/data/datasources/restaurant_remote_data_source.dart';
+import 'package:loqma_food_delivery_app/features/restaurants/data/repositories/restaurant_repository_impl.dart';
+import 'package:loqma_food_delivery_app/features/restaurants/domain/repositories/restaurants_repository.dart';
+import 'package:loqma_food_delivery_app/features/restaurants/domain/usecases/get_restaurant_details_usecase.dart';
+import 'package:loqma_food_delivery_app/features/restaurants/presentation/cubit/restaurant_details_cubit.dart';
 
 /// الـ service locator بتاع التطبيق كله.
 /// أي حتة محتاجة dependency بتطلبها كده: sl<AuthRemoteDataSource>()
@@ -28,6 +34,7 @@ void setupServiceLocator() {
   _initCore();
   _initAuth();
   _initHome();
+  _initRestaurants();
 }
 
 //! ───────────────────────── Core ─────────────────────────
@@ -76,6 +83,22 @@ void _initHome() {
   );
   sl.registerLazySingleton(() => GetHomeUseCase(repository: sl()));
   sl.registerFactory(() => HomeCubit(getHomeUseCase: sl()));
+}
+
+void _initRestaurants() {
+  sl.registerLazySingleton<RestaurantsApiService>(
+    () => RestaurantsApiService(sl<Dio>()),
+  );
+  sl.registerLazySingleton<RestaurantsRemoteDataSource>(
+    () => RestaurantsRemoteDataSource(apiService: sl<RestaurantsApiService>()),
+  );
+  sl.registerLazySingleton<RestaurantsRepository>(
+    () => RestaurantsRepositoryImpl(remoteDataSource: sl()),
+  );
+  sl.registerLazySingleton(() => GetRestaurantDetailsUseCase(repository: sl()));
+  sl.registerFactory(
+    () => RestaurantDetailsCubit(getRestaurantDetailsUseCase: sl()),
+  );
 }
 
 // Session expired -> clear the whole stack and open the login screen

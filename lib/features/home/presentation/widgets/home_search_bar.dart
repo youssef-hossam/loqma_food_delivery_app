@@ -24,7 +24,7 @@ class HomeSearchBar extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          height: 52.h,
+          height: 52.r,
           padding: EdgeInsets.symmetric(horizontal: AppSpacing.s16.w),
           decoration: BoxDecoration(
             color: context.loqma.card,

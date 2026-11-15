@@ -33,7 +33,7 @@ class DishCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 110.h,
+              height: 110.w,
               width: double.infinity,
               child: Stack(
                 fit: StackFit.expand,

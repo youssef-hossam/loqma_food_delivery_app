@@ -16,9 +16,3 @@ abstract class CategoryModel with _$CategoryModel {
       _$CategoryModelFromJson(json);
 }
 
-//  {
-//                 "id": "556d81f3-8804-43b6-a411-56df343a10b4",
-//                 "slug": "burgers",
-//                 "name": "Burgers",
-//                 "imageUrl": "http://localhost:3000/static/images/burger.jpg"
-//             },

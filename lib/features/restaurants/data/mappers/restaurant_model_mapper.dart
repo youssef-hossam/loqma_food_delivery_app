@@ -16,5 +16,7 @@ extension RestaurantModelMapper on RestaurantModel {
     maxDeliveryTime: deliveryTime.max,
     isOpen: isOpen,
     isFavorite: isFavorite,
+    description: description,
+    address: address,
   );
 }

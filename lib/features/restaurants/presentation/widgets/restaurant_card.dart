@@ -116,7 +116,7 @@ class RestaurantCard extends StatelessWidget {
     final colors = context.loqma;
 
     return SizedBox(
-      height: 120.h,
+      height: 130.w,
       width: double.infinity,
       child: Stack(
         fit: StackFit.expand,

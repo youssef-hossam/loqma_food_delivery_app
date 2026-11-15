@@ -25,6 +25,8 @@ abstract class RestaurantModel with _$RestaurantModel {
     required double? distanceKm,
     required bool isFavorite,
     required List<IdNameModel> categories,
+    String? description,
+    String? address,
   }) = _RestaurantModel;
 
   factory RestaurantModel.fromJson(Map<String, dynamic> json) =>
