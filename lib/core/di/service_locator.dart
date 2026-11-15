@@ -4,6 +4,15 @@ import 'package:loqma_food_delivery_app/core/network/dio_factory.dart';
 import 'package:loqma_food_delivery_app/core/router/app_router.dart';
 import 'package:loqma_food_delivery_app/core/router/routes.dart';
 import 'package:loqma_food_delivery_app/features/auth/data/datasource/auth_api_service.dart';
+import 'package:loqma_food_delivery_app/features/cart/data/datasources/cart_api_service.dart';
+import 'package:loqma_food_delivery_app/features/cart/data/datasources/cart_remote_data_source.dart';
+import 'package:loqma_food_delivery_app/features/cart/data/repositories/cart_repository_impl.dart';
+import 'package:loqma_food_delivery_app/features/cart/domain/repositories/cart_repository.dart';
+import 'package:loqma_food_delivery_app/features/cart/domain/usecases/add_to_cart_usecase.dart';
+import 'package:loqma_food_delivery_app/features/cart/domain/usecases/get_cart_usecase.dart';
+import 'package:loqma_food_delivery_app/features/cart/domain/usecases/remove_cart_item_usecase.dart';
+import 'package:loqma_food_delivery_app/features/cart/domain/usecases/update_cart_item_usecase.dart';
+import 'package:loqma_food_delivery_app/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:loqma_food_delivery_app/features/home/data/datasources/home_api_service.dart';
 import 'package:loqma_food_delivery_app/features/auth/data/datasource/auth_local_data_source.dart';
 import 'package:loqma_food_delivery_app/features/auth/data/datasource/auth_remote_data_source.dart';
@@ -37,6 +46,7 @@ void setupServiceLocator() {
   _initAuth();
   _initHome();
   _initRestaurants();
+  _initCart();
 }
 
 //! ───────────────────────── Core ─────────────────────────
@@ -103,6 +113,30 @@ void _initRestaurants() {
     () => RestaurantDetailsCubit(getRestaurantDetailsUseCase: sl()),
   );
   sl.registerFactory(() => DishDetailsCubit(getDishDetailsUseCase: sl()));
+}
+
+//! ───────────────────────── Cart ─────────────────────────
+void _initCart() {
+  sl.registerLazySingleton<CartApiService>(() => CartApiService(sl<Dio>()));
+  sl.registerLazySingleton<CartRemoteDataSource>(
+    () => CartRemoteDataSource(apiService: sl<CartApiService>()),
+  );
+  sl.registerLazySingleton<CartRepository>(
+    () => CartRepositoryImpl(remoteDataSource: sl()),
+  );
+  sl.registerLazySingleton(() => GetCartUseCase(repository: sl()));
+  sl.registerLazySingleton(() => AddToCartUseCase(repository: sl()));
+  sl.registerLazySingleton(() => UpdateCartItemUseCase(repository: sl()));
+  sl.registerLazySingleton(() => RemoveCartItemUseCase(repository: sl()));
+  // Factory like the other cubits, but it's created only once in app.dart
+  sl.registerFactory(
+    () => CartCubit(
+      getCartUseCase: sl(),
+      addToCartUseCase: sl(),
+      updateCartItemUseCase: sl(),
+      removeCartItemUseCase: sl(),
+    ),
+  );
 }
 
 // Session expired -> clear the whole stack and open the login screen

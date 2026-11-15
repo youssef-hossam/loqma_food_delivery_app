@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loqma_food_delivery_app/core/error/failure.dart';
 import 'package:loqma_food_delivery_app/core/extensions/context_extensions.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_colors.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_shadows.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_spacing.dart';
+import 'package:loqma_food_delivery_app/core/widgets/app_alert_dialog.dart';
 import 'package:loqma_food_delivery_app/core/widgets/app_error_view.dart';
 import 'package:loqma_food_delivery_app/core/widgets/app_network_image.dart';
 import 'package:loqma_food_delivery_app/core/widgets/loqma_button.dart';
+import 'package:loqma_food_delivery_app/core/widgets/quantity_stepper.dart';
+import 'package:loqma_food_delivery_app/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:loqma_food_delivery_app/features/restaurants/domain/entities/dish_details_entity.dart';
 import 'package:loqma_food_delivery_app/features/restaurants/domain/entities/option_group_entity.dart';
 import 'package:loqma_food_delivery_app/features/restaurants/presentation/cubit/dish_details_cubit.dart';
 import 'package:loqma_food_delivery_app/features/restaurants/presentation/cubit/dish_details_state.dart';
 import 'package:loqma_food_delivery_app/features/restaurants/presentation/widgets/circle_icon_button.dart';
 import 'package:loqma_food_delivery_app/features/restaurants/presentation/widgets/option_group_section.dart';
-import 'package:loqma_food_delivery_app/features/restaurants/presentation/widgets/quantity_stepper.dart';
 
 class DishDetailsPage extends StatelessWidget {
   const DishDetailsPage({super.key, required this.dishId});
@@ -62,6 +65,7 @@ class _DishContentState extends State<_DishContent> {
   final Map<String, Set<String>> _selected = {};
   final _notesController = TextEditingController();
   int _quantity = 1;
+  bool _isAdding = false;
 
   @override
   void initState() {
@@ -120,6 +124,43 @@ class _DishContentState extends State<_DishContent> {
       }
     }
     return unitPrice * _quantity;
+  }
+
+  Future<void> _addToCart({bool replace = false}) async {
+    setState(() => _isAdding = true);
+
+    final failure = await context.read<CartCubit>().addItem(
+      dishId: widget.dish.id,
+      quantity: _quantity,
+      // All the selected option ids from every group
+      optionIds: _selected.values.expand((ids) => ids).toList(),
+      notes: _notesController.text,
+      replace: replace,
+    );
+
+    if (!mounted) return;
+    setState(() => _isAdding = false);
+
+    if (failure == null) {
+      Navigator.pop(context);
+    } else if (failure is ServerFailure &&
+        failure.code == 'CART_RESTAURANT_CONFLICT') {
+      // The cart has dishes from another restaurant: ask before emptying it
+      showAppAlert(
+        context,
+        AppAlertDialog(
+          icon: 'alert',
+          tone: AlertTone.warning,
+          title: context.s.cartConflictTitle,
+          message: context.s.cartConflictBody,
+          primaryLabel: context.s.startNewCart,
+          onPrimary: () => _addToCart(replace: true),
+          secondaryLabel: context.s.cancel,
+        ),
+      );
+    } else {
+      showFailureDialog(context, failure);
+    }
   }
 
   @override
@@ -246,12 +287,10 @@ class _DishContentState extends State<_DishContent> {
             Expanded(
               child: LoqmaButton(
                 label: context.s.addToCartWithPrice(_totalPrice),
+                isLoading: _isAdding,
                 // Disabled until the required groups are picked
                 onPressed: _isValid && widget.dish.isAvailable
-                    ? () {
-                        // TODO: add to cart (next step)
-                        Navigator.pop(context);
-                      }
+                    ? _addToCart
                     : null,
               ),
             ),

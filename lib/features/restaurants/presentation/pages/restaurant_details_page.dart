@@ -8,6 +8,7 @@ import 'package:loqma_food_delivery_app/core/theme/app_colors.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_spacing.dart';
 import 'package:loqma_food_delivery_app/core/widgets/app_error_view.dart';
 import 'package:loqma_food_delivery_app/core/widgets/app_network_image.dart';
+import 'package:loqma_food_delivery_app/features/cart/presentation/widgets/view_cart_bar.dart';
 import 'package:loqma_food_delivery_app/features/restaurants/domain/entities/restaurant_details_entity.dart';
 import 'package:loqma_food_delivery_app/features/restaurants/presentation/cubit/restaurant_details_cubit.dart';
 import 'package:loqma_food_delivery_app/features/restaurants/presentation/cubit/restaurant_details_state.dart';
@@ -26,6 +27,7 @@ class RestaurantDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.loqma.background,
+      bottomNavigationBar: const ViewCartBar(),
       body: BlocBuilder<RestaurantDetailsCubit, RestaurantDetailsState>(
         builder: (context, state) {
           return AnimatedSwitcher(

@@ -105,6 +105,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "bestseller": MessageLookupByLibrary.simpleMessage("Bestseller"),
         "caloriesInfo": m3,
         "cardExpires": m4,
+        "cartConflictTitle": MessageLookupByLibrary.simpleMessage(
+          "Start a new cart?",
+        ),
+        "cartConflictBody": MessageLookupByLibrary.simpleMessage(
+          "Your cart has items from another restaurant. Adding this dish will remove them.",
+        ),
+        "startNewCart": MessageLookupByLibrary.simpleMessage(
+          "Start new cart",
+        ),
+        "cancel": MessageLookupByLibrary.simpleMessage(
+          "Cancel",
+        ),
         "cartEmpty": MessageLookupByLibrary.simpleMessage("Your cart is empty"),
         "cashOnDelivery":
             MessageLookupByLibrary.simpleMessage("Cash on delivery"),

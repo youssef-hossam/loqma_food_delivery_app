@@ -105,6 +105,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "bestseller": MessageLookupByLibrary.simpleMessage("الأكثر مبيعًا"),
         "caloriesInfo": m3,
         "cardExpires": m4,
+        "cartConflictTitle": MessageLookupByLibrary.simpleMessage(
+          "تبدأ سلة جديدة؟",
+        ),
+        "cartConflictBody": MessageLookupByLibrary.simpleMessage(
+          "السلة فيها أكل من مطعم تاني. لو كملت هنفضّيها ونضيف الطبق ده.",
+        ),
+        "startNewCart": MessageLookupByLibrary.simpleMessage(
+          "ابدأ سلة جديدة",
+        ),
+        "cancel": MessageLookupByLibrary.simpleMessage(
+          "إلغاء",
+        ),
         "cartEmpty": MessageLookupByLibrary.simpleMessage("السلة فاضية"),
         "cashOnDelivery":
             MessageLookupByLibrary.simpleMessage("الدفع عند الاستلام"),

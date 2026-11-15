@@ -5,6 +5,8 @@ import 'package:loqma_food_delivery_app/core/di/service_locator.dart';
 import 'package:loqma_food_delivery_app/core/extensions/context_extensions.dart';
 import 'package:loqma_food_delivery_app/core/theme/app_colors.dart';
 import 'package:loqma_food_delivery_app/core/widgets/loqma_bottom_nav.dart';
+import 'package:loqma_food_delivery_app/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:loqma_food_delivery_app/features/cart/presentation/widgets/view_cart_bar.dart';
 import 'package:loqma_food_delivery_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:loqma_food_delivery_app/features/home/presentation/pages/home_page.dart';
 
@@ -18,6 +20,13 @@ class MainShellPage extends StatefulWidget {
 
 class _MainShellPageState extends State<MainShellPage> {
   int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    // The user is logged in here, so it's safe to load the cart
+    context.read<CartCubit>().loadCart();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,15 +54,22 @@ class _MainShellPageState extends State<MainShellPage> {
           _TabPlaceholder(title: context.s.navProfile),
         ],
       ),
-      bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 12.h),
-          child: LoqmaBottomNav(
-            items: items,
-            currentIndex: _currentIndex,
-            onTap: (index) => setState(() => _currentIndex = index),
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Shows only when the cart has items
+          const ViewCartBar(useSafeArea: false),
+          SafeArea(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 12.h),
+              child: LoqmaBottomNav(
+                items: items,
+                currentIndex: _currentIndex,
+                onTap: (index) => setState(() => _currentIndex = index),
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

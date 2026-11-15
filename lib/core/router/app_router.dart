@@ -8,6 +8,7 @@ import 'package:loqma_food_delivery_app/features/auth/presentation/cubits/login/
 import 'package:loqma_food_delivery_app/features/auth/presentation/cubits/register/register_cubit.dart';
 import 'package:loqma_food_delivery_app/features/auth/presentation/pages/login_page.dart';
 import 'package:loqma_food_delivery_app/features/auth/presentation/pages/register_page.dart';
+import 'package:loqma_food_delivery_app/features/cart/presentation/pages/cart_page.dart';
 import 'package:loqma_food_delivery_app/features/home/presentation/pages/main_shell_page.dart';
 import 'package:loqma_food_delivery_app/features/onboarding/domain/onboarding_repository.dart';
 import 'package:loqma_food_delivery_app/features/restaurants/presentation/cubit/dish_details_cubit.dart';
@@ -74,6 +75,9 @@ class AppRouter {
             child: DishDetailsPage(dishId: dishId),
           ),
         );
+      case Routes.cart:
+        // No BlocProvider: CartCubit is already above MaterialApp
+        return RouterTransitions.buildHorizontal(const CartPage());
       default:
         return RouterTransitions.build(
           const Scaffold(body: Center(child: Text('No Route'))),

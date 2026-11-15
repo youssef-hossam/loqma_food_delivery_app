@@ -1380,6 +1380,46 @@ class S {
     );
   }
 
+  /// `Start a new cart?`
+  String get cartConflictTitle {
+    return Intl.message(
+      'Start a new cart?',
+      name: 'cartConflictTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your cart has items from another restaurant. Adding this dish will remove them.`
+  String get cartConflictBody {
+    return Intl.message(
+      'Your cart has items from another restaurant. Adding this dish will remove them.',
+      name: 'cartConflictBody',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start new cart`
+  String get startNewCart {
+    return Intl.message(
+      'Start new cart',
+      name: 'startNewCart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Checkout`
   String get checkout {
     return Intl.message(

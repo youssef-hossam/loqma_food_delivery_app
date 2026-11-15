@@ -7,4 +7,7 @@ class ApiConstants {
   static const String restaurantDetails = '/restaurants/{id}';
   static const String restaurantMenu = '/restaurants/{id}/menu';
   static const String dishDetails = '/menu-items/{id}';
+  static const String cart = '/cart';
+  static const String cartItems = '/cart/items';
+  static const String cartItem = '/cart/items/{id}';
 }
